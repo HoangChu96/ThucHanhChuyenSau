@@ -5,13 +5,58 @@ import {
 } from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-
+import {connect} from 'react-redux';
+import changeInfo from '../api/change_info';
+import getToken from '../api/getToken';
 const {height} = Dimensions.get('window');
 
-export default class ChangeInfo extends Component{
+class ChangeInfo extends Component{
+  constructor(props){
+    super(props);
+    const { name, address, phone } = this.props.navigation.state.params;
+    this.state = {
+      name: name, 
+      address: address, 
+      phone: phone
+    }
+  }
+
+  onSuccess() {
+        Alert.alert(
+            'Notice',
+            'Change Info successfully',
+            [
+                { text: 'OK' }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    onFail() {
+        Alert.alert(
+            'Notice',
+            'Email has been used by other',
+            [
+                { text: 'OK'}
+            ],
+            { cancelable: false }
+        );
+    }
+
+
+  changeInfoUser() {
+    const { name, address, phone } = this.state;
+    getToken()
+    .then(token => changeInfo(token, name, phone, address))
+    .then(user => console.log(user))
+    .catch(err => console.log(err));
+  }
+
   render(){
     const {navigation} = this.props;
     const {goBack} = this.props.navigation;
+   const { name, address, phone } = this.props.navigation.state.params;
+    // const { phone, address, name} = this.state;
     const { wrapper, body, row1, titleStyle, iconStyle, inputStyle, btnInputStyle, btnText, container} = styles;
 
     return (
@@ -33,16 +78,22 @@ export default class ChangeInfo extends Component{
             <TextInput
               style={inputStyle}
               placeholder='Enter Your Name'
+              value={name}
+              onChangeText = {text => this.setState({...this.state, name: text})}
             />
             <TextInput
               style={inputStyle}
               placeholder='Enter Your Address'
+              value={address}
+              onChangeText= {text => this.setState({...this.state, address: text})}
             />
             <TextInput
               style={inputStyle}
               placeholder='Enter Your Phone Number'
+              value={phone}
+              onChangeText={text => this.setState({...this.state, phone:text})}
             />
-            <TouchableOpacity style={btnInputStyle}>
+            <TouchableOpacity style={btnInputStyle} onPress= {this.changeInfoUser.bind(this)} >
               <Text style={btnText}>CHANGE YOUR INFOMATION</Text>
             </TouchableOpacity>
         </View>
@@ -52,6 +103,8 @@ export default class ChangeInfo extends Component{
     )
   }
 }
+
+export default ChangeInfo;
 
 const styles = StyleSheet.create({
   body:{

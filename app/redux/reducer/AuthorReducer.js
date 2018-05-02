@@ -6,7 +6,7 @@ const defaultState = {
   onSignIn: null
 };
 
-const reducer = (state = defaultState, action) =>{
+const AuthorReducer = (state = defaultState, action) =>{
   if(action.type === 'TOOGLE_LOGNIN')
     return {
       ...state,
@@ -45,4 +45,4 @@ const reducer = (state = defaultState, action) =>{
   return state;
 };
 
-export default reducer;
+export default AuthorReducer;

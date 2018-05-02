@@ -50,15 +50,21 @@ class SignIn extends Component {
 
     onSignIn() {
       const { email, password } = this.state;
+   //   const {onSignIn} = this.props;
 
       signIn(email, password)
           .then(res => {
-            console.log(res);
-            global.onSignIn(res.user);
+            // this.props.dispatch({
+            //   type: 'SIGNIN',
+            //   onSignIn: res.user
+            // });
+            global.onSignIn(res.Users);
             this.props.goBack();
             saveToken(res.token);
           })
-          .catch(err => console.log(err));
+          .catch(err =>
+            console.log(err)
+          );
     }
 
     render() {
@@ -105,7 +111,13 @@ class SignIn extends Component {
     }
 }
 
-export default connect()(SignIn);
+function mapStateToProps (state) {
+  return {
+    onSignIn: state.onSignIn
+  }
+}
+
+export default connect(mapStateToProps)(SignIn);
 
 const styles = StyleSheet.create({
   btnText: {

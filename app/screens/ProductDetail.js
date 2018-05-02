@@ -6,7 +6,6 @@ import {
   RefreshControl
 } from 'react-native';
 import {connect} from 'react-redux';
-import global from '../global';
 import url from '../config/handle';
 import saveCart from '../api/saveCart';
 
@@ -15,12 +14,13 @@ const {width, height} =Dimensions.get('window')
 class ProductDetail extends Component{
   addThisProductToCart() {
     const { product } = this.props.navigation.state.params;
+    const {cartArray} = this.props;
     this.props.dispatch({
       type: 'ADD_CART',
       product: product,
       quantity: 1
     });
-    saveCart(product); //callback vi ham la bat dong bo
+    saveCart(cartArray); //callback vi ham la bat dong bo
 
   }
 

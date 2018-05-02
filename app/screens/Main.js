@@ -5,6 +5,7 @@ import {
 import {connect} from 'react-redux';
 
 import url from '../config/handle';
+import global from '../global';
 import TabNavigator from 'react-native-tab-navigator';
 import getCart from '../api/getCart';
 import Cart from './Cart';
@@ -13,6 +14,7 @@ import ProductNavigator from '../navigations/ProductNavigator';
 import Category from './Category';
 import Favorite from './Favorite';
 import Header from '../components/Header/Header';
+import Search from './Search';
 
 class Main extends PureComponent{
   constructor(props){
@@ -20,25 +22,30 @@ class Main extends PureComponent{
     this.state = {
       selectedTab:'home'
     };
+    global.gotoSearch = this.gotoSearch.bind(this);
   }
 
   async componentDidMount(){
-    fetch(url.index)
-    .then(res => res.json())
-    .then((resJSON) => {
-      const {type, product} = resJSON;
-      this.props.dispatch({
-        type: 'TYPES',
-        types: type,
-        topProducts: product,
+      fetch(url.index)
+      .then(res => res.json())
+      .then((resJSON) => {
+        const {type, product} = resJSON;
+        this.props.dispatch({
+          type: 'TYPES',
+          types: type,
+          topProducts: product,
 
-      });
-    })
-    .catch(
-      (e) => { console.log(e)}
-    );
-    const list = await getCart(); 
-    console.log(list);
+        });
+      })
+      .catch(
+        (e) => { console.log(e)}
+      );
+      const list = await getCart(); 
+      console.log(list);
+  }
+
+  gotoSearch() {
+      this.setState({ selectedTab: 'search' });
   }
 
   openMenu(){
@@ -79,14 +86,14 @@ class Main extends PureComponent{
 
           <TabNavigator.Item
             style={styles.wapper}
-            selected={this.state.selectedTab === 'favorite'}
-            title="favorite"
+            selected={this.state.selectedTab === 'search'}
+            title="Search"
             selectedTitleStyle={{color: '#34B089'}}
-            renderIcon = {() => <Image source = {require('../media/appIcon/favorite0.png')} style={styles.tabStyles} />}
-            renderSelectedIcon = { () => <Image source = {require('../media/appIcon/favorite.png')} style={styles.tabStyles}/>}
-            onPress={() => this.setState({ selectedTab: 'favorite' })}
+            renderIcon = {() => <Image source = {require('../media/appIcon/search0.png')} style={styles.tabStyles} />}
+            renderSelectedIcon = { () => <Image source = {require('../media/appIcon/search.png')} style={styles.tabStyles}/>}
+            onPress={() => this.setState({ selectedTab: 'search' })}
           >
-            <Favorite />
+            <Search />
           </TabNavigator.Item>
 
           <TabNavigator.Item

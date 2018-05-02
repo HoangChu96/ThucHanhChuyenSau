@@ -8,6 +8,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SaleProduct from '../../views/SaleProduct';
 import global from '../../global';
+import searchProduct from '../../api/search';
 
 const { height, width } = Dimensions.get('window');
 
@@ -29,7 +30,7 @@ export default class Header extends Component{
   onSearch() {
       const { txtSearch } = this.state;
       this.setState({ txtSearch: '' });
-      search(txtSearch)
+      searchProduct(txtSearch)
       .then(arrProduct => global.setArraySearch(arrProduct))
       .catch(err => console.log(err));
   }
@@ -44,7 +45,7 @@ export default class Header extends Component{
               underlineColorAndroid="transparent"
               value={this.state.txtSearch}
               onChangeText={text => this.setState({ txtSearch: text })}
-            //  onFocus={() => global.gotoSearch()}
+              onFocus={() => global.gotoSearch()}
               onSubmitEditing={this.onSearch.bind(this)}
           />
           </View>
@@ -74,7 +75,7 @@ export default class Header extends Component{
             <TouchableOpacity onPress={this.clickSearch.bind(this)}>
               <Image
                 style={styles.iconStyle}
-                source={require('../../media/appIcon/search.png')}
+                source={require('../../media/appIcon/search1.png')}
               />
             </TouchableOpacity>
           </View>

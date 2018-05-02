@@ -1,4 +1,4 @@
-const navigateReducer = (state='HOME', action) => {
+const NavigationReducer = (state='HOME', action) => {
   if(action.type === 'Tab_Home') return 'HOME';
   if(action.type === 'Tab_Category') return 'CATEGORY';
   if(action.type === 'Tab_Favorite') return 'FAVORITE';
@@ -17,4 +17,4 @@ const navigateReducer = (state='HOME', action) => {
   return state;
 };
 
-export default navigateReducer;
+export default NavigationReducer;

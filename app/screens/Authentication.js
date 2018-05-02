@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text,  View,  Image,
-  TextInput,  Dimensions,  TouchableOpacity,
-  KeyboardAvoidingView,  AsyncStorage
+  StyleSheet, Text,  View,  Image, TextInput, Dimensions,
+  TouchableOpacity, KeyboardAvoidingView,  AsyncStorage
 } from 'react-native';
 import {  StackNavigator } from 'react-navigation';
 

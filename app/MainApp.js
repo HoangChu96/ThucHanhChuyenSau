@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity
 } from 'react-native';
+import {connect} from 'react-redux';
 import Drawer from 'react-native-drawer';
 
 import Main from './screens/Main';
@@ -10,12 +11,18 @@ import checkLogin from './api/checkLogin';
 import getToken from './api/getToken';
 import global from './global';
 
-export default class MainApp extends Component{
+class MainApp extends Component{
 
   componentDidMount() {
+    const {onSignIn} = this.props;
     getToken()
     .then(token => checkLogin(token))
-    .then(res => { global.onSignIn(res.user) })
+    // .then(res => {this.props.dispatch({
+    //       type: 'SIGNIN',
+    //       onSignIn: res.user
+    //     })
+    // })
+    .then(res => {global.onSignIn(res.user)})
     .catch(err => console.log(err));
   };
 
@@ -51,6 +58,15 @@ export default class MainApp extends Component{
     )
   }
 }
+
+function mapPropsToState (state) {
+  return {
+    onSignIn: state.onSignIn
+  }
+}
+
+export default connect()(MainApp);
+
 const drawerStyles={
   drawer: {
     shadowColor:'#000000',

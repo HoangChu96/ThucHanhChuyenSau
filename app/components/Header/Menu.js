@@ -70,7 +70,8 @@ class Menu extends Component{
   render(){
     const {navigation} = this.props;
     const {container, profile, btnSignIn, signIn, btnMenu, btnText, userName, body} = styles;
-    const {user} = this.state;
+   const {user} = this.state;
+
     const logOutJSX = (
       <View style={container}>
         <TouchableOpacity style={btnSignIn} onPress={()=> navigation.navigate('Authentication')}>
@@ -78,6 +79,7 @@ class Menu extends Component{
         </TouchableOpacity>
       </View>
     );
+    
     const logInJSX = (
       <View  style={body}>
         <Text style={userName}>{user ? user.name.toUpperCase() : ''}</Text>
@@ -85,7 +87,14 @@ class Menu extends Component{
           <TouchableOpacity style={btnMenu} onPress={()=> navigation.navigate('OrderHistory')}>
               <Text style={btnText}>Order History</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={btnMenu} onPress={()=> navigation.navigate('ChangeInfo')}>
+          <TouchableOpacity style={btnMenu} onPress={()=> 
+            navigation.navigate({
+              routeName: 'ChangeInfo',
+              params: {
+                user:user
+              }
+            })
+          }>
               <Text style={btnText}>Edit Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity style={btnMenu} onPress={this.onSignOut.bind(this)}>
@@ -111,6 +120,15 @@ class Menu extends Component{
     )
   }
 }
+
+function mapStateToProps(state){
+  return {
+    isLogedIn: state.isLogedIn,
+  };
+}
+
+export default connect(mapStateToProps)(Menu);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -158,11 +176,3 @@ const styles = StyleSheet.create({
     marginBottom:50
   }
 })
-
-function mapStateToProps(state){
-  return {
-    isLogedIn: state.isLogedIn,
-  };
-}
-
-export default connect(mapStateToProps)(Menu);
