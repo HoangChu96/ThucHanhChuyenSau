@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "797229298757",
+    "firebase_url": "https://thuchanhchuyensau-1ffbb.firebaseio.com",
+    "project_id": "thuchanhchuyensau-1ffbb",
+    "storage_bucket": "thuchanhchuyensau-1ffbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797229298757:android:06d11daa26cfa199",
+        "android_client_info": {
+          "package_name": "com.shopsportshoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797229298757-s9uvin51rph697g3384bg0mfur3r4ed7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shopsportshoes",
+            "certificate_hash": "6367f099547dd32c9a3971800117d3a7fa4c419e"
+          }
+        },
+        {
+          "client_id": "797229298757-mt54ad3345cmvlcsvbql8h8paned5o57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3dEFGuQrQz8q5skuEBcxhA8xTmBKK3gU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797229298757-mt54ad3345cmvlcsvbql8h8paned5o57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
