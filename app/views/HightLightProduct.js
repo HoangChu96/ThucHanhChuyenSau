@@ -10,29 +10,10 @@ const {width, height} = Dimensions.get('window');
 class HightLightProduct extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      selectedLike: false
-    };
   }
 
   render(){
     const {navigation,  topProducts} = this.props;
-    const selectedFavorite = () => {
-      this.setState({
-        selectedLike: !this.state.selectedLike,
-      });
-    };
-    const favorite = (
-        <Image
-          style = {styles.imageLike}
-          source = {require('../media/appIcon/favoriteFull.png')}/>
-    );
-    const noFavorite = (
-      <Image
-        style = {styles.imageLike}
-        source = {require('../media/appIcon/favoriteEmty.png')}/>
-    );
-    const like = this.state.selectedLike ? favorite : noFavorite;
 
     return (
       <View style={styles.wrapper}>
@@ -52,17 +33,18 @@ class HightLightProduct extends Component{
                       }
                     })
                   }}>
+
                     <Image
                       style={styles.imgStyles}
-                      source={{uri: url.index + e.images}}
+
+                      source={{uri: '${e.images[0]}'}}
                     />
                     <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
                   </TouchableOpacity>
+
                   <View style={styles.row3}>
+                  <Text style={styles.productName}>{e.images[0]}</Text>
                     <Text style={styles.productPrice}>{e.price}$</Text>
-                    <TouchableOpacity onPress = {() => selectedFavorite()}>
-                      {like}
-                    </TouchableOpacity>
                   </View>
                 </View>
               ))

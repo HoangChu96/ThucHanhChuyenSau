@@ -5,39 +5,51 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Category extends Component {
+class Category extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     const {
       wrapper, title, categoryStyles, txtProduct
     } = styles;
+    const {types, navigation} = this.props;
 
     return (
       <View style={wrapper}>
         <View style={title}>
           <Text>CATEGORY</Text>
         </View>
+
         <View>
-          <TouchableOpacity style={categoryStyles}>
-            <Text style={txtProduct}>Adidas</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={categoryStyles}>
-            <Text style={txtProduct}>Nike</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={categoryStyles}>
-            <Text style={txtProduct}>Puma</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={categoryStyles}>
-            <Text style={txtProduct}>Sneaker</Text>
-          </TouchableOpacity>
+          {
+            types.map(e => (
+              <View key={e.id}>
+                <TouchableOpacity
+                  style={categoryStyles}
+                  onPress = {() => {
+                   
+                  }}>
+                    <Text style={txtProduct}>{e.name.toUpperCase()}</Text>
+                </TouchableOpacity>
+              </View>
+            ))
+          }
         </View>
       </View>
     );
   }
 }
+
+function mapStateToProps(state){
+  return{
+    types: state.types
+  };
+}
+
+export default connect(mapStateToProps)(Category);
 
 const styles = StyleSheet.create({
   wrapper:{

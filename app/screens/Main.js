@@ -34,14 +34,14 @@ class Main extends PureComponent{
           type: 'TYPES',
           types: type,
           topProducts: product,
-
         });
+        console.log(this.props.topProducts);
       })
       .catch(
         (e) => { console.log(e)}
       );
       const list = await getCart(); 
-      console.log(list);
+
   }
 
   gotoSearch() {
