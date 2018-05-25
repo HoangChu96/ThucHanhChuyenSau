@@ -18,7 +18,7 @@ class ProductListView1 extends Component{
   }
 
   render(){
-    const {navigation, topProducts} = this.props;
+    const {navigation, topProducts, dataSource} = this.props;
 
     const selectedTab = () => {
       this.setState({
@@ -47,7 +47,7 @@ class ProductListView1 extends Component{
       <ScrollView>
         <View style={styles.body}>
           {
-            topProducts.map(e => (
+            dataSource.map(e => (
               <View style={styles.productContainer} key={e.id}>
                 <TouchableOpacity onPress = {() => {
                   navigation.navigate({
@@ -76,7 +76,7 @@ class ProductListView1 extends Component{
 }
 function mapStateToProps(state){
   return {
-    topProducts: state.topProducts,
+    dataSource: state.dataSource,
     cartArray: state.cartArray
   }
 }

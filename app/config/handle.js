@@ -1,4 +1,4 @@
-let url = 'http://192.168.0.71/';
+let url = 'http://192.168.0.68/';
 let loginUrl =  url + 'app/login.php';
 let registerUrl = url + 'app/register.php';
 let changeInfoUrl = url + 'app/change_info.php';
@@ -7,6 +7,7 @@ let index = url + 'app/';
 let typeProduct = url + 'app/images/type/';
 let product = url + 'app/images/product/';
 let productList = url + 'app/productList.php?page=';
+let category = url + 'app/product_by_type.php';
 let searchUrl = url + 'app/search.php?key=${key}';
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
   product: product,
   checkLogin: checkLogin,
   changeInfoUrl: changeInfoUrl,
-  searchUrl : searchUrl
+  searchUrl : searchUrl,
+  category: category
 }

@@ -3,7 +3,8 @@ const defaultState = {
   types: [],
   topProducts:[],
   cartArray: [],
-  onSignIn: null
+  onSignIn: null,
+  dataSource: []
 };
 
 const reducer = (state = defaultState, action) =>{
@@ -24,6 +25,12 @@ const reducer = (state = defaultState, action) =>{
       ...state,
       types: action.types,
       topProducts: action.topProducts
+    };
+
+    if(action.type === 'TYPEPRODUCT')
+    return {
+      ...state,
+      dataSource: action.dataSource
     };
 
   //them sp vao gio hang

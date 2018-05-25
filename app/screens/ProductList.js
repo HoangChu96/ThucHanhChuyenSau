@@ -5,6 +5,7 @@ import {
   Image, FlatList, ScrollView,
   RefreshControl
 } from 'react-native';
+import {connect} from 'react-redux';
 
 import ProductListView2 from '../views/ProductListView2';
 import ProductListView1 from '../views/ProductListView1';
@@ -21,9 +22,28 @@ class ProductList extends Component{
       array: [],
       page: 1,
       refreshing: false,
-      selectView: true
+      selectView: true,
+
     }
   }
+
+  componentDidMount(){
+    fetch('http://192.168.0.68/app/product_by_type.php')
+    .then(res => res.json())
+    .then((resJSON) => {
+      const {product} = resJSON;
+
+      this.props.dispatch({
+        type: 'TYPEPRODUCT',
+        dataSource: product
+      });
+
+    })
+    .catch(
+      (e) => { console.log(e)}
+    );  
+  }
+
   //set hien thi view 1
   view1(){
     this.setState({
@@ -37,6 +57,7 @@ class ProductList extends Component{
 
   render(){
     const {goBack} =this.props.navigation;
+    const {productType} = this.props.navigation.state.params;
     const {navigation} = this.props;
     const {
       container,body, header, productStyles, imgStyles,
@@ -67,7 +88,7 @@ class ProductList extends Component{
               source ={require('../media/appIcon/back.png')}
             />
           </TouchableOpacity>
-          <Text style={{color: '#34B089'}}>Adidas</Text>
+          <Text style={{color: '#34B089'}}>{productType.name}</Text>
           <Text />
         </View>
 
@@ -91,8 +112,14 @@ class ProductList extends Component{
     );
   }
 }
+function mapStateToProps(state){
+  return {
+    dataSource: state.dataSource,
+  };
+}
 
-export default ProductList;
+export default connect(mapStateToProps)(ProductList);
+
 
 const productWidth = (width - 60)/2;
 const productHeight = productWidth;

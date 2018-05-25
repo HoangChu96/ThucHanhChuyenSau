@@ -37,13 +37,13 @@ class HightLightProduct extends Component{
                     <Image
                       style={styles.imgStyles}
 
-                      source={{uri: '${e.images[0]}'}}
+                      source={{ uri: url.product + e.image }}
                     />
                     <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
                   </TouchableOpacity>
 
                   <View style={styles.row3}>
-                  <Text style={styles.productName}>{e.images[0]}</Text>
+                    <Text style={styles.productName}>{e.images[0]}</Text>
                     <Text style={styles.productPrice}>{e.price}$</Text>
                   </View>
                 </View>

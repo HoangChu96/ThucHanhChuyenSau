@@ -4,6 +4,8 @@ import Authentication from '../screens/Authentication';
 import ChangeInfo from '../screens/ChangeInfo';
 import OrderHistory from '../screens/OrderHistory';
 import {StackNavigator} from 'react-navigation';
+import Category from '../screens/Category';
+import ProductByType from '../components/ProductByType';
 
 const MainStack = StackNavigator(
   {
@@ -11,7 +13,9 @@ const MainStack = StackNavigator(
     Main: {screen: Main},
     Authentication: {screen: Authentication},
     ChangeInfo: {screen: ChangeInfo},
-    OrderHistory: {screen: OrderHistory}
+    OrderHistory: {screen: OrderHistory},
+    Category: {screen: Category},
+    ProductByType: {screen: ProductByType}
   },
   {
    headerMode: 'none',

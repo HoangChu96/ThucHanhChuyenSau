@@ -53,7 +53,7 @@ class MainApp extends Component{
           main: { opacity:(2-ratio)/2 }
         })}
       >
-          <Main open={this.openControlPanel.bind(this)}/>
+          <Main open={this.openControlPanel.bind(this)} navigation={navigation} />
       </Drawer>
     )
   }

@@ -11,12 +11,13 @@ const {width, height} = Dimensions.get('window');
 
 class ProductListView2 extends Component{
   render(){
-    const {navigation} = this.props;
+    const {navigation, dataSource} = this.props;
+
     return (
       <ScrollView>
         <View style={styles.body}>
           {
-            this.props.topProducts.map(e => (
+            dataSource.map(e => (
               <View style={styles.productContainer} key={e.id}>
                 <TouchableOpacity onPress = {() =>{
                   navigation.navigate({
@@ -53,7 +54,7 @@ class ProductListView2 extends Component{
 
 function mapStateToProps(state){
   return {
-    topProducts: state.topProducts,
+    dataSource: state.dataSource,
     cartArray: state.cartArray
   }
 }

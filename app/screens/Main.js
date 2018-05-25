@@ -23,6 +23,9 @@ class Main extends PureComponent{
       selectedTab:'home'
     };
     global.gotoSearch = this.gotoSearch.bind(this);
+    global.gotoProductType = this.gotoProductType.bind(this);
+    
+
   }
 
   async componentDidMount(){
@@ -35,17 +38,18 @@ class Main extends PureComponent{
           types: type,
           topProducts: product,
         });
-        console.log(this.props.topProducts);
       })
       .catch(
         (e) => { console.log(e)}
       );
       const list = await getCart(); 
-
   }
 
   gotoSearch() {
       this.setState({ selectedTab: 'search' });
+  }
+  gotoProductType(){
+    this.setState({selectedTab: 'category'})
   }
 
   openMenu(){
@@ -81,7 +85,7 @@ class Main extends PureComponent{
             renderSelectedIcon = { () => <Image source = {require('../media/appIcon/category.png')} style={styles.tabStyles}/>}
             onPress={() => this.setState({ selectedTab: 'category' })}
           >
-            <Category />
+            <Category navigation={navigation} />
           </TabNavigator.Item>
 
           <TabNavigator.Item
