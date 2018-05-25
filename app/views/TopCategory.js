@@ -36,9 +36,9 @@ class TopCategory extends Component {
                       }
                     };
                     navigation.navigate(p)
-                  }}
-                  key={e.id}
-                >
+                    }}
+                    key={e.id}
+                  >
                   <Image
                     style={styles.imgStyles}
                     source={{ uri: url.typeProduct + e.image }}

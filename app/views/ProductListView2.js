@@ -19,27 +19,31 @@ class ProductListView2 extends Component{
           {
             dataSource.map(e => (
               <View style={styles.productContainer} key={e.id}>
-                <TouchableOpacity onPress = {() =>{
-                  navigation.navigate({
-                      routeName: 'ProductDetail',
-                      params: {
-                      product:e //truyền dữ liệu của 1 product sang detail
-                    }
-                  })
-                }}>
-                  <Swiper
-                    autoplay={true}
-                    autoplayTimeout={5}
-                    activeDotColor={'#34B089'}
-                  >
+        
+                <Swiper
+                  // showsButtons={true}
+                  autoplay={true}
+                  autoplayTimeout={5}
+                  activeDotColor={'#34B089'}
+                >
+                  <TouchableOpacity onPress = {() =>{
+                      navigation.navigate({
+                          routeName: 'ProductDetail',
+                          params: {
+                          productDt:e //truyền dữ liệu của 1 product sang detail
+                        }
+                      })
+                    }}>
+
                     <Image
                       style={styles.imgStyles}
-                      source={require('../media/temp/sp1.jpg')}
+                      source={{uri: url.product + e.images[0]}}
                     />
 
-                  </Swiper>
-                  <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+
+                </Swiper>
+                <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
                 <View style={styles.row3}>
                   <Text style={styles.productPrice}>{e.price}$</Text>
                 </View>
@@ -112,3 +116,10 @@ const styles = StyleSheet.create({
     height: 18
   }
 })
+
+            
+// <Swiper
+// autoplay={true}
+// autoplayTimeout={5}
+// activeDotColor={'#34B089'}
+// >

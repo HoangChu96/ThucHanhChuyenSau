@@ -12,6 +12,10 @@ import saveCart from '../api/saveCart';
 const {width, height} =Dimensions.get('window')
 
 class ProductDetail extends Component{
+  constructor(props){
+    super(props);
+    console.log(props.navigation.state.params.product.images);
+  }
   addThisProductToCart() {
     const { product } = this.props.navigation.state.params;
     const {cartArray} = this.props;
@@ -56,7 +60,7 @@ class ProductDetail extends Component{
             <View style={leftStyles}>
               <Image
                 style={imgStyles}
-                source={{uri: url.index + product.images}}
+                source={{uri: 'http://myshoes.vn/image/cache/data/product9/12.3.17/giay-nike-air-max-2017-nam-do-den-01-800x800_0.jpg'}}
               />
             </View>
             <View style={productStyles}>
@@ -140,7 +144,7 @@ const styles = StyleSheet.create({
   },
   imgStyles:{
     width: productWidth,
-  //  height: productHeight
+   height: productHeight
   },
   addToCart:{
     backgroundColor:'white'

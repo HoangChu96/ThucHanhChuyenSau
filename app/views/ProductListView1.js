@@ -18,7 +18,7 @@ class ProductListView1 extends Component{
   }
 
   render(){
-    const {navigation, topProducts, dataSource} = this.props;
+    const {navigation, dataSource} = this.props;
 
     const selectedTab = () => {
       this.setState({
@@ -51,15 +51,15 @@ class ProductListView1 extends Component{
               <View style={styles.productContainer} key={e.id}>
                 <TouchableOpacity onPress = {() => {
                   navigation.navigate({
-                      routeName: 'ProductDetail',
-                      params: {
+                    routeName: 'ProductDetail',
+                    params: {
                       product:e //truyền dữ liệu của 1 product sang detail
                     }
                   })
                 }}>
                   <Image
                     style={styles.imgStyles}
-                    source={{uri: url.index + e.images}}
+                    source={{uri: url.product + e.images[0]}}
                   />
                   <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
                 </TouchableOpacity>

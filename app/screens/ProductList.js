@@ -28,7 +28,7 @@ class ProductList extends Component{
   }
 
   componentDidMount(){
-    fetch('http://192.168.0.68/app/product_by_type.php')
+    fetch(url.category)
     .then(res => res.json())
     .then((resJSON) => {
       const {product} = resJSON;
