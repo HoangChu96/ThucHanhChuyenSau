@@ -5,6 +5,8 @@ import {
   Image, FlatList, ScrollView,
   RefreshControl
 } from 'react-native';
+import Swiper from 'react-native-swiper';
+
 import {connect} from 'react-redux';
 import url from '../config/handle';
 import saveCart from '../api/saveCart';
@@ -59,9 +61,10 @@ class ProductDetail extends Component{
           <View style={productStyles}>
             <View style={leftStyles}>
               <Image
-                style={imgStyles}
-                source={{uri: 'http://myshoes.vn/image/cache/data/product9/12.3.17/giay-nike-air-max-2017-nam-do-den-01-800x800_0.jpg'}}
+                style={styles.imgStyles}
+                source={{ uri: url.product + product.images[0] }}
               />
+
             </View>
             <View style={productStyles}>
               <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>

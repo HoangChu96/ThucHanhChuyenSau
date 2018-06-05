@@ -14,7 +14,7 @@ import ProductNavigator from '../navigations/ProductNavigator';
 import Category from './Category';
 import Favorite from './Favorite';
 import Header from '../components/Header/Header';
-import Search from './Search';
+import SearchView from './SearchView';
 
 class Main extends PureComponent{
   constructor(props){
@@ -76,7 +76,7 @@ class Main extends PureComponent{
             <ProductNavigator />
           </TabNavigator.Item>
 
-          <TabNavigator.Item
+          {/* <TabNavigator.Item
             style={styles.wapper}
             selected={this.state.selectedTab === 'category'}
             title="Category"
@@ -86,7 +86,7 @@ class Main extends PureComponent{
             onPress={() => this.setState({ selectedTab: 'category' })}
           >
             <Category navigation={navigation} />
-          </TabNavigator.Item>
+          </TabNavigator.Item> */}
 
           <TabNavigator.Item
             style={styles.wapper}
@@ -97,7 +97,7 @@ class Main extends PureComponent{
             renderSelectedIcon = { () => <Image source = {require('../media/appIcon/search.png')} style={styles.tabStyles}/>}
             onPress={() => this.setState({ selectedTab: 'search' })}
           >
-            <Search />
+            <SearchView />
           </TabNavigator.Item>
 
           <TabNavigator.Item

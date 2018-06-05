@@ -5,4 +5,4 @@ const searchProduct = (key) => (
     .then(res => res.json())
 );
 
-module.exports = searchProduct;
+export default searchProduct;

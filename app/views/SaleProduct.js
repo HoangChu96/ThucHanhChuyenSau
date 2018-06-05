@@ -22,10 +22,11 @@ export default class SaleProduct extends Component {
               <View style={styles.label_wrapper}>
                   <View style={styles.label}>
                       <Image
-                        source={require('../media/appIcon/sale.png')}
+                        style={styles.imgLabel}
+                        source={require('../media/appIcon/label.png')}
                       />
-                      <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text>
+                      {/* <Text style={styles.cashback}>50%</Text>
+                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
                   </View>
               </View>
               <Image
@@ -44,10 +45,11 @@ export default class SaleProduct extends Component {
               <View style={styles.label_wrapper}>
                   <View style={styles.label}>
                       <Image
-                        source={require('../media/appIcon/sale.png')}
+                        style={styles.imgLabel}
+                        source={require('../media/appIcon/label.png')}
                       />
-                      <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text>
+                      {/* <Text style={styles.cashback}>50%</Text>
+                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
                   </View>
               </View>
               <Image
@@ -66,10 +68,11 @@ export default class SaleProduct extends Component {
               <View style={styles.label_wrapper}>
                   <View style={styles.label}>
                       <Image
-                        source={require('../media/appIcon/sale.png')}
+                        style={styles.imgLabel}
+                        source={require('../media/appIcon/label.png')}
                       />
-                      <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text>
+                      {/* <Text style={styles.cashback}>50%</Text>
+                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
                   </View>
               </View>
               <Image
@@ -88,10 +91,11 @@ export default class SaleProduct extends Component {
               <View style={styles.label_wrapper}>
                   <View style={styles.label}>
                       <Image
-                        source={require('../media/appIcon/sale.png')}
+                        style={styles.imgLabel}
+                        source={require('../media/appIcon/label.png')}
                       />
-                      <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text>
+                      {/* <Text style={styles.cashback}>50%</Text>
+                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
                   </View>
               </View>
               <Image
@@ -140,7 +144,7 @@ const styles = StyleSheet.create({
   },
   label_wrapper:{
     position: 'absolute',
-    top: -6,
+    top: 0,
     right: 0,
     width: '100%',
     flexDirection: 'row',
@@ -151,11 +155,16 @@ const styles = StyleSheet.create({
   },
   label: {
       position: 'relative',
+      right: 0,
       width: 'auto'
+  },
+  imgLabel:{
+    width: 50,
+    height: 50
   },
   cashback: {
       position: 'absolute',
-      top: 6,
+      
       width: '100%',
       textAlign: 'center',
       fontSize: 14,
@@ -164,7 +173,7 @@ const styles = StyleSheet.create({
   },
   text: {
       position: 'absolute',
-      bottom: 5,
+      top: 10,
       fontWeight: 'bold',
       fontSize: 16,
       width: '100%',

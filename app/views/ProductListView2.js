@@ -19,30 +19,23 @@ class ProductListView2 extends Component{
           {
             dataSource.map(e => (
               <View style={styles.productContainer} key={e.id}>
-        
-                <Swiper
-                  // showsButtons={true}
-                  autoplay={true}
-                  autoplayTimeout={5}
-                  activeDotColor={'#34B089'}
-                >
-                  <TouchableOpacity onPress = {() =>{
-                      navigation.navigate({
-                          routeName: 'ProductDetail',
-                          params: {
-                          productDt:e //truyền dữ liệu của 1 product sang detail
-                        }
-                      })
-                    }}>
+      
+                <TouchableOpacity onPress = {() =>{
+                    navigation.navigate({
+                        routeName: 'ProductDetail',
+                        params: {
+                        product:e //truyền dữ liệu của 1 product sang detail
+                      }
+                    })
+                  }}>
 
-                    <Image
-                      style={styles.imgStyles}
-                      source={{uri: url.product + e.images[0]}}
-                    />
+                  <Image
+                    style={styles.imgStyles}
+                    source={{uri: url.product + e.images[0]}}
+                  />
 
-                  </TouchableOpacity>
+                </TouchableOpacity>
 
-                </Swiper>
                 <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
                 <View style={styles.row3}>
                   <Text style={styles.productPrice}>{e.price}$</Text>

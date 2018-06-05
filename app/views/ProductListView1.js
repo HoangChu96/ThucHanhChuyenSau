@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#fff',
     margin: 10,
+    paddingTop: 10,
     flexDirection:'row',
     justifyContent: 'space-around',
     flexWrap: 'wrap',

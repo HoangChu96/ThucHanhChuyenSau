@@ -58,7 +58,7 @@ class SignIn extends Component {
             //   type: 'SIGNIN',
             //   onSignIn: res.user
             // });
-            global.onSignIn(res.Users);
+            global.onSignIn(res.user);
             this.props.goBack();
             saveToken(res.token);
           })

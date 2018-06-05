@@ -8,7 +8,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SaleProduct from '../../views/SaleProduct';
 import global from '../../global';
-import searchProduct from '../../api/search';
+import search from '../../api/search';
 
 const { height, width } = Dimensions.get('window');
 
@@ -30,7 +30,7 @@ export default class Header extends Component{
   onSearch() {
       const { txtSearch } = this.state;
       this.setState({ txtSearch: '' });
-      searchProduct(txtSearch)
+      search(txtSearch)
       .then(arrProduct => global.setArraySearch(arrProduct))
       .catch(err => console.log(err));
   }

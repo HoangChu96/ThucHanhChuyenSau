@@ -16,7 +16,7 @@ class TopCategory extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text style={styles.textStyles}>TOP OF CATEGORY</Text>
+          <Text style={styles.textStyles}>CATEGORY</Text>
         </View>
         <View style={{ flex: 4 }}>
           <Swiper
@@ -38,7 +38,7 @@ class TopCategory extends Component {
                     navigation.navigate(p)
                     }}
                     key={e.id}
-                  >
+                >
                   <Image
                     style={styles.imgStyles}
                     source={{ uri: url.typeProduct + e.image }}

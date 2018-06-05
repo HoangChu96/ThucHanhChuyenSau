@@ -61,7 +61,7 @@ class ProductList extends Component{
     const {navigation} = this.props;
     const {
       container,body, header, productStyles, imgStyles,
-      leftStyles, rightStyles, textStyles
+      leftStyles, rightStyles, textStyles, selectView
     } = styles;
 
     //goi den list view 1
@@ -93,12 +93,18 @@ class ProductList extends Component{
         </View>
 
         <View style={body}>
-          <View style={{flexDirection:'row'}}>
+          <View style={selectView}>
             <TouchableOpacity  onPress={this.view1.bind(this)}>
-              <Text style={textStyles}>View1</Text>
+              <Image
+                style={{width: 26.5, height: 25}}
+                source = {require('../media/appIcon/list1.png')}
+              />
             </TouchableOpacity>
-            <TouchableOpacity  onPress={this.view2.bind(this)}>
-              <Text style={textStyles}>View2</Text>
+            <TouchableOpacity  style={{marginTop:1}} onPress={this.view2.bind(this)}>
+              <Image
+                  style={{width: 24.5,height:23}}
+                  source = {require('../media/appIcon/list3.png')}
+                />
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={() => filter()}>
@@ -127,7 +133,7 @@ const productHeight = productWidth;
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    backgroundColor: '#AFAEAF'
+    backgroundColor: '#DBDBD8'
   },
   header:{
     backgroundColor: '#fff',
@@ -138,7 +144,15 @@ const styles = StyleSheet.create({
   body:{
     flexDirection: 'row',
     justifyContent:'space-between',
-    margin: 10
+    margin: 10,
+    marginBottom: 0,
+    backgroundColor:"#fff",
+    padding: 5,
+    borderBottomWidth:1,
+    borderColor: '#AFAEAF'
+  },
+  selectView:{
+    flexDirection:'row'
   },
   productContainer: {
     width: productWidth,

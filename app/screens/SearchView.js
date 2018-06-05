@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, TouchableOpacity,
-    ListView, View, Image, Dimensions
+    ListView, View, Image, Dimensions, FlatList
 } from 'react-native';
 import global from '../global';
 import url from '../config/handle';
@@ -10,18 +10,18 @@ function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-class Search extends Component {
+class SearchView extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
-            listProduct: ds
+            dataSource: ds
         };
         global.setArraySearch = this.setSearchArray.bind(this);
     }
 
     setSearchArray(arrProduct) {
-        this.setState({ listProduct: this.state.listProduct.cloneWithRows(arrProduct) });
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(arrProduct) });
     }
 
     gotoDetail(product) {
@@ -43,7 +43,7 @@ class Search extends Component {
         return (
             <View style={wrapper}>
                 <ListView
-                    dataSource={this.state.listProduct}
+                    dataSource={this.state.dataSource}
                     renderRow={productItem => (
                         <View style={product}>
                             <Image source={{ uri: `${url.product}${productItem.images[0]}` }} style={productImage} />
@@ -155,4 +155,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Search;
+export default SearchView;
