@@ -7,12 +7,16 @@ import Home from '../screens/Home';
 import ProductList from '../screens/ProductList';
 import ProductListView2 from '../views/ProductListView2';
 import ProductDetail from '../screens/ProductDetail';
+import Filter from '../views/Filter';
+import FilterNavigator from './../views/FilterNavigator';
 
 const ProductListDetail = StackNavigator(
   {
     Home : {screen: Home},
+    FilterNavigator: {screen: FilterNavigator},
     ProductList: { screen: ProductList},
     ProductListView2: { screen: ProductListView2},
+    Filter: {screen: Filter},
     ProductDetail: {screen: ProductDetail}
   },
   {

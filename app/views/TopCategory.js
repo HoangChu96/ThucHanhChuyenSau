@@ -30,7 +30,7 @@ class TopCategory extends Component {
                 <TouchableOpacity
                   onPress={() => {
                     const p = {
-                      routeName:'ProductList' ,
+                      routeName:'FilterNavigator' ,
                       params: {
                         productType: e
                       }

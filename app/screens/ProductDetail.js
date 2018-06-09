@@ -3,30 +3,69 @@ import {
   View, Text,Dimensions,
   StyleSheet, TouchableOpacity,
   Image, FlatList, ScrollView,
-  RefreshControl
+  RefreshControl, Alert
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 import {connect} from 'react-redux';
 import url from '../config/handle';
 import saveCart from '../api/saveCart';
+import global from '../global';
 
 const {width, height} =Dimensions.get('window')
 
 class ProductDetail extends Component{
   constructor(props){
     super(props);
-    // console.log(props.navigation.state.params.product);
+    this.state = {
+      cart: [],
+      isLognIn: true
+    }
   }
+
   addThisProductToCart() {
     const { product } = this.props.navigation.state.params;
     const {cartArray} = this.props;
-    this.props.dispatch({
-      type: 'ADD_CART',
-      product: product,
-      quantity: 1
-    });
-    saveCart(cartArray);
+    
+    if(this.state.isLognIn !== null){
+      if(cartArray.some(e => (e.id) === product.id)) {
+        Alert.alert(
+          'Notice',
+          'Product already exists',
+          [
+            {text: 'OK'}
+          ],
+          {cancelable: false}
+        )
+        return false;
+      };
+      this.props.dispatch(
+        {
+          type: 'ADD_CART',
+          cartArray: product,
+          // quantity: 1
+        },
+        () => saveCart(cartArray)
+      );
+    }
+    else{
+      Alert.alert(
+        'Notice',
+        'You are not logged in',
+        [
+          {text: 'OK'}
+        ],
+        {cancelable: false}
+      )
+      return false;
+    }
+    
+    // this.setState(
+    //   {
+    //     cart: this.state.cart.concat({product})
+    //   },
+    //   () => saveCart(this.state.cartArray)
+    // );
   }
 
   render(){

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   View, Text, TouchableOpacity,
   Slider, Image, StyleSheet,
-  Button, Picker
+  Button, Picker, ScrollView
 } from 'react-native';
 
 class Filter extends Component {
@@ -25,7 +25,7 @@ class Filter extends Component {
 
   render() {
     const {
-      checkBoxStyle, container, imgCheckBox, title,
+      checkBoxStyle, container, imgCheckBox, title, txtTitle,
       categoryStyles, txtProduct, MainContainer, wrapper
     } = styles;
     const checked = (
@@ -43,10 +43,10 @@ class Filter extends Component {
     const checkBox = this.state.onCheck ? checked : unchecked;
 
     return(
-        <View style={container}>
+        <ScrollView style={container}>
           <View style={wrapper}>
             <View style={title}>
-              <Text>Giới Tính</Text>
+              <Text style= {txtTitle}>Giới Tính</Text>
             </View>
             <View style={checkBoxStyle}>
               <TouchableOpacity onPress={() => this.onCheckBox()}>
@@ -63,7 +63,7 @@ class Filter extends Component {
 
           <View style={wrapper}>
             <View style={title}>
-              <Text>PRICE</Text>
+              <Text style= {txtTitle} >PRICE</Text>
             </View>
             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <Text>{this.state.minValue}</Text>
@@ -82,7 +82,7 @@ class Filter extends Component {
 
           <View style={wrapper}>
             <View style={title}>
-              <Text>SORT BY</Text>
+              <Text style= {txtTitle}>SORT BY</Text>
             </View>
             <View style={MainContainer}>
               <Picker
@@ -95,29 +95,11 @@ class Filter extends Component {
             </View>
           </View>
 
-          <View style={wrapper}>
-            <View style={title}>
-              <Text>CATEGORY</Text>
-            </View>
-            <View>
-              <TouchableOpacity style={categoryStyles}>
-                <Text style={txtProduct}>Adidas</Text>
-              </TouchableOpacity>
+          <TouchableOpacity style={title}>
+            <Text style= {txtTitle}>Find</Text>
+          </TouchableOpacity>
 
-              <TouchableOpacity style={categoryStyles}>
-                <Text style={txtProduct}>Nike</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={categoryStyles}>
-                <Text style={txtProduct}>Puma</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={categoryStyles}>
-                <Text style={txtProduct}>Sneaker</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+        </ScrollView>
     )
   }
 }
@@ -141,9 +123,14 @@ const styles = StyleSheet.create({
     margin: 10
   },
   title:{
-    margin: 10,
+    margin: 5,
+    padding: 5,
+    backgroundColor: '#34B089',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  txtTitle: {
+    color: 'white'
   },
   categoryStyles:{
     margin:10

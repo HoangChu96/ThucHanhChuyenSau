@@ -15,16 +15,18 @@ import Category from './Category';
 import Favorite from './Favorite';
 import Header from '../components/Header/Header';
 import SearchView from './SearchView';
+import saveCart from '../api/saveCart';
 
 class Main extends PureComponent{
   constructor(props){
     super(props);
     this.state = {
       selectedTab:'home',
-    
+      cart: []
     };
     global.gotoSearch = this.gotoSearch.bind(this);
     global.gotoProductType = this.gotoProductType.bind(this);
+    props.cartArray = this.cartArray.bind(this);
     
 
   }
@@ -46,8 +48,26 @@ class Main extends PureComponent{
 
       console.log('aa');
       // const list = await getCart(); 
-      await getCart();
+      // await getCart();
+      await getCart()
+      .then(cart => this.setState({cart}));
+        // .then(product => {
+        //   // const {cartArray} = this.props;
+        //   this.props.dispatch({ type: 'ADD_CART', cartArray: product })
+        // });
+      console.log(this.props.cartArray);
 
+  }
+
+  cartArray(product){
+    const isExits = this.state.cart.some(e.product.id === product.id);
+    if(isExits) return false;
+    this.setState(
+      {
+        cart: this.state.cart.concat({product})
+      },
+      () => saveCart(this.state.cartArray)
+    );
   }
 
   gotoSearch() {

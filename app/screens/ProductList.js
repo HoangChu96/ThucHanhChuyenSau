@@ -55,6 +55,11 @@ class ProductList extends Component{
     this.setState({selectView: false});
   };
 
+  openMenu(){
+    const {open} = this.props;
+    open();
+  }
+
   render(){
     const {goBack} =this.props.navigation;
     const {productType} = this.props.navigation.state.params;
@@ -107,7 +112,7 @@ class ProductList extends Component{
                 />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => filter()}>
+          <TouchableOpacity onPress={this.openMenu.bind(this)}>
             <Text>Filter</Text>
           </TouchableOpacity>
         </View>

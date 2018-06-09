@@ -6,6 +6,7 @@ import {
 import {connect} from 'react-redux';
 
 import global from '../../app/global';
+import url from '../config/handle';
 import sendOrder from '../api/sendOrder';
 import getToken from '../api/getToken';
 import ProductDetail from './ProductDetail';
@@ -73,13 +74,13 @@ class Cart extends Component {
       deleteStyles, topStyles, txtTopStyles, productController
     } = styles;
 
-    // const arrTotal = cartArray.map(e => e.product.price * e.quantity);
-    // const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
-
+    const arrTotal = cartArray.map(e => e.price);
+    const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
+    
     return (
       <View style={container}>
         <View style={topStyles}>
-          <Text style={txtTopStyles}>TOTAL ORDER:  0$</Text>
+          <Text style={txtTopStyles}>TOTAL ORDER: {total} $</Text>
           <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
             <Text style={txtTopStyles}>PAY</Text>
           </TouchableOpacity>
@@ -92,7 +93,7 @@ class Cart extends Component {
                 <View style={leftStyles}>
                   <Image
                     style={imgStyles}
-                    source={require('../media/temp/sp1.jpg')}
+                    source={{uri: url.product + product.images[0]}}
                   />
                 </View>
                 <View style={bottomStyles}>
@@ -136,7 +137,7 @@ class Cart extends Component {
 function mapStateToProps(state){
   return{
     cartArray: state.cartArray
-  }
+  };
 }
 export default connect(mapStateToProps)(Cart);
 
