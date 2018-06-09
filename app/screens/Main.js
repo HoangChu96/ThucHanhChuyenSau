@@ -20,7 +20,8 @@ class Main extends PureComponent{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab:'home'
+      selectedTab:'home',
+    
     };
     global.gotoSearch = this.gotoSearch.bind(this);
     global.gotoProductType = this.gotoProductType.bind(this);
@@ -42,7 +43,11 @@ class Main extends PureComponent{
       .catch(
         (e) => { console.log(e)}
       );
-      const list = await getCart(); 
+
+      console.log('aa');
+      // const list = await getCart(); 
+      await getCart();
+
   }
 
   gotoSearch() {

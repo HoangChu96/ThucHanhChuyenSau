@@ -57,7 +57,7 @@ export default class Splash extends Component{
 						source = {require('../media/appIcon/logo.jpg')}
 					/>
 	
-		        </FadeInView>
+		    </FadeInView>
 			</View>
 		)
 	}

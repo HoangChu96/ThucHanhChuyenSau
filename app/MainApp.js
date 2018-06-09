@@ -10,6 +10,7 @@ import Menu from './components/Header/Menu.js';
 import checkLogin from './api/checkLogin';
 import getToken from './api/getToken';
 import global from './global';
+import getCart from './api/getCart';
 
 class MainApp extends Component{
 

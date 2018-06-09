@@ -5,9 +5,16 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
+import global from '../../app/global';
+import sendOrder from '../api/sendOrder';
+import getToken from '../api/getToken';
 import ProductDetail from './ProductDetail';
 
 class Cart extends Component {
+  constructor(props){
+    super(props);
+    console.log(props.cartArray);
+  }
   alertPay(){
     Alert.alert(
         'Notice',
@@ -31,46 +38,49 @@ class Cart extends Component {
     )
   }
 
-  // incrQuantity(id) {
-  //     global.incrQuantity(id);
-  // }
-  // decrQuantity(id) {
-  //     global.decrQuantity(id);
-  // }
-  // removeProduct(id) {
-  //     global.removeProduct(id);
-  // }
-  // async onSendOrder() {
-  //   try {
-  //     const token = await getToken();
-  //     const arrayDetail = this.props.cartArray.map(e => ({
-  //         id: e.product.id,
-  //         quantity: e.quantity
-  //     }));
-  //     const kq = await sendOrder(token, arrayDetail);
-  //     if (kq === 'THEM_THANH_CONG') {
-  //         console.log('THEM THANH CONG');
-  //     } else {
-  //         console.log('THEM THAT BAI', kq);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
+  incrQuantity(id) {
+      global.incrQuantity(id);
+  }
+  decrQuantity(id) {
+      global.decrQuantity(id);
+  }
+  removeProduct(id) {
+      global.removeProduct(id);
+  }
+  async onSendOrder() {
+    try {
+      const token = await getToken();
+      const arrayDetail = this.props.cartArray.map(e => ({
+          id: e.product.id,
+          quantity: e.quantity
+      }));
+      const kq = await sendOrder(token, arrayDetail);
+      if (kq === 'THEM_THANH_CONG') {
+          console.log('THEM THANH CONG');
+      } else {
+          console.log('THEM THAT BAI', kq);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   render() {
     const {navigation, cartArray} = this.props;
     const {
       productStyles, leftStyles, imgStyles,
-      rightStyles, container, bottomStyles,
-      deleteStyles, topStyles, txtTopStyles
+      rightStyles, container, bottomStyles, numberOfProduct,
+      deleteStyles, topStyles, txtTopStyles, productController
     } = styles;
+
+    // const arrTotal = cartArray.map(e => e.product.price * e.quantity);
+    // const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
 
     return (
       <View style={container}>
         <View style={topStyles}>
-          <Text style={txtTopStyles}>TOTAL ORDER:  </Text>
-          <TouchableOpacity onPress={()=> this.alertPay()}>
+          <Text style={txtTopStyles}>TOTAL ORDER:  0$</Text>
+          <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
             <Text style={txtTopStyles}>PAY</Text>
           </TouchableOpacity>
         </View>
@@ -92,6 +102,17 @@ class Cart extends Component {
                   <Text style={{color: '#AFAEAF'}}>PRICE: {product.price}</Text>
                   <Text style={{color: '#AFAEAF'}}>TOTAL: </Text>
                   <Text style={{color: '#AFAEAF'}}></Text>
+                  <View style={productController}>
+                      <View style={numberOfProduct}>
+                          <TouchableOpacity onPress={() => this.incrQuantity(product.id)}>
+                              <Text>+</Text>
+                          </TouchableOpacity>
+                          <Text>{product.quantity}</Text>
+                          <TouchableOpacity onPress={() => this.decrQuantity(product.id)}>
+                              <Text>-</Text>
+                          </TouchableOpacity>
+                      </View>
+                  </View>
                   <TouchableOpacity onPress={()=> navigation.navigate('ProductDetail')}>
                     <Text style={{color: '#aab034'}}>Show Details</Text>
                   </TouchableOpacity>
@@ -143,6 +164,14 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  productController: {
+    flexDirection: 'row'
+  },
+  numberOfProduct: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-around'
   },
   topStyles:{
     flexDirection: 'row',

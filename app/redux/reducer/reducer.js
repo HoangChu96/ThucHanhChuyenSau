@@ -4,7 +4,9 @@ const defaultState = {
   topProducts:[],
   cartArray: [],
   onSignIn: null,
-  dataSource: []
+  dataSource: [],
+  cartShow: [],
+  searchArray: []
 };
 
 const reducer = (state = defaultState, action) =>{
@@ -27,7 +29,7 @@ const reducer = (state = defaultState, action) =>{
       topProducts: action.topProducts
     };
 
-    if(action.type === 'TYPEPRODUCT')
+  if(action.type === 'TYPEPRODUCT')
     return {
       ...state,
       dataSource: action.dataSource
@@ -37,11 +39,14 @@ const reducer = (state = defaultState, action) =>{
   if(action.type === 'ADD_CART')
     return{
       ...state,
-      cartArray: [
-        ...state.cartArray,
-        action.product
-      ]
+      cartArray: state.cartArray.concat(action.product)
     };
+  if(action.type === 'SEARCH_PRODUCT'){
+    return{
+      ...state,
+      searchArray: action.searchArray
+    }
+  }
 
   if(action.type === 'SIGNIN'){
     return {

@@ -98,16 +98,6 @@ export default class SignUp extends Component {
                   <Text style={btnText}>SIGN UP NOW</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
-
-            <View>
-              <View style={text}>
-                <Text style={{color:'#fff'}}>OR</Text>
-              </View>
-
-              <TouchableOpacity style={btnInputStyle}>
-                <Text style={btnText}>LOGIN FACEBOOK</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         );
     }

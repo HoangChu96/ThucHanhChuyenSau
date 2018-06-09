@@ -16,7 +16,7 @@ const {width, height} =Dimensions.get('window')
 class ProductDetail extends Component{
   constructor(props){
     super(props);
-    console.log(props.navigation.state.params.product.images);
+    // console.log(props.navigation.state.params.product);
   }
   addThisProductToCart() {
     const { product } = this.props.navigation.state.params;
@@ -26,8 +26,7 @@ class ProductDetail extends Component{
       product: product,
       quantity: 1
     });
-    saveCart(cartArray); //callback vi ham la bat dong bo
-
+    saveCart(cartArray);
   }
 
   render(){

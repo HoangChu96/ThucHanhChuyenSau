@@ -8,18 +8,20 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SaleProduct from '../../views/SaleProduct';
 import global from '../../global';
-import search from '../../api/search';
+import searchProduct from '../../api/searchProduct';
+import { connect } from 'react-redux';
+import url from '../../config/handle';
 
 const { height, width } = Dimensions.get('window');
 
-export default class Header extends Component{
+class Header extends Component{
   constructor(props){
     super(props);
     this.state = {
       selected: false,
       clickSearch: false,
-      txtSearch: '',
-      value: 0
+      txtSearch: "",
+      // value: 0
     };
   }
 
@@ -29,10 +31,22 @@ export default class Header extends Component{
   //click tìm kiếm sản phẩm
   onSearch() {
       const { txtSearch } = this.state;
-      this.setState({ txtSearch: '' });
-      search(txtSearch)
-      .then(arrProduct => global.setArraySearch(arrProduct))
+      // this.setState({ txtSearch: '' });
+      fetch(url.searchUrl + txtSearch)
+      .then(res => res.json())
+      .then(resJSON => {
+          const {searchPro} = resJSON;
+          this.props.dispatch({
+            type: 'SEARCH_PRODUCT',
+            searchArray: searchPro
+          });
+        }
+      )
       .catch(err => console.log(err));
+      console.log("header");
+      console.log(this.props.searchArray);
+      this.setState({txtSearch: ''});
+      
   }
 
   render(){
@@ -84,6 +98,14 @@ export default class Header extends Component{
     );
   }
 }
+
+function mapStateToProps(state){
+  return{
+    searchArray: state.searchArray
+  };
+}
+
+export default connect(mapStateToProps)(Header);
 
 const styles = StyleSheet.create({
   wrapper: {
