@@ -6,72 +6,21 @@ import {
   RefreshControl, Alert
 } from 'react-native';
 import Swiper from 'react-native-swiper';
-
-import {connect} from 'react-redux';
 import url from '../config/handle';
-import saveCart from '../api/saveCart';
-import global from '../global';
 
 const {width, height} =Dimensions.get('window')
 
-class ProductDetail extends Component{
+class CartDetail extends Component{
   constructor(props){
     super(props);
     this.state = {
-      cart: [],
-      isLognIn: true
+      cart: []
     }
-  }
-
-  addThisProductToCart() {
-    const { product } = this.props.navigation.state.params;
-    const {cartArray} = this.props;
-
-    
-    if(this.state.isLognIn !== null){
-      if(cartArray.some(e => (e.id) === product.id)) {
-        Alert.alert(
-          'Notice',
-          'Product already exists',
-          [
-            {text: 'OK'}
-          ],
-          {cancelable: false}
-        )
-        return false;
-      };
-      this.props.dispatch(
-        {
-          type: 'ADD_CART',
-          cartArray: product,
-          // quantity: 1
-        },
-        () => saveCart(cartArray)
-      );
-    }
-    else{
-      Alert.alert(
-        'Notice',
-        'You are not logged in',
-        [
-          {text: 'OK'}
-        ],
-        {cancelable: false}
-      )
-      return false;
-    }
-    
-    // this.setState(
-    //   {
-    //     cart: this.state.cart.concat({product})
-    //   },
-    //   () => saveCart(this.state.cartArray)
-    // );
   }
 
   render(){
     const {navigation} = this.props;
-    const {product} = this.props.navigation.state.params;
+    const {data} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
     const {
       container,body, header, productStyles, bottomRow1Style,
@@ -88,12 +37,6 @@ class ProductDetail extends Component{
               source ={require('../media/appIcon/back.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={addToCart}
-            onPress={() => this.addThisProductToCart()}
-          >
-            <Text style={btnText}>ADD TO CART</Text>
-          </TouchableOpacity>
         </View>
 
         <ScrollView style={wrapper}>
@@ -101,17 +44,17 @@ class ProductDetail extends Component{
             <ScrollView style={leftStyles} horizontal>
               <Image
                 style={styles.imgStyles}
-                source={{ uri: url.product + product.images[0] }}
+                source={{ uri: url.product + data.images[0] }}
               />
               <Image
                 style={styles.imgStyles}
-                source={{ uri: url.product + product.images[1] }}
+                source={{ uri: url.product + data.images[1] }}
               />
 
             </ScrollView>
             <View style={productStyles}>
-              <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>
-              <Text style={{color: 'purple'}}>PRICE: {product.price}$</Text>
+              <Text style={{fontSize: 18, color:'#34B089'}}>{data.name.toUpperCase()}</Text>
+              <Text style={{color: 'purple'}}>PRICE: {data.price}$</Text>
               <Text>STATUS: </Text>
               <Text>SIZE</Text>
             </View>
@@ -125,20 +68,15 @@ class ProductDetail extends Component{
                 <Text style={txtBottom}>Size Guide</Text>
               </TouchableOpacity>
             </View>
-            <Text style={{marginBottom: 10}}>{product.description}</Text>
+            <Text style={{marginBottom: 10}}>{data.description}</Text>
           </View>
         </ScrollView>
       </View>
     );
   }
 }
-function mapStateToProps(state){
-  return{
-    cartArray: state.cartArray,
-    quantity: state.quantity
-  }
-}
-export default connect(mapStateToProps)(ProductDetail);
+
+export default CartDetail;
 
 const productWidth = width - 20;
 const productHeight = productWidth;

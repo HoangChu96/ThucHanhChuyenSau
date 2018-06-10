@@ -46,7 +46,18 @@ class Cart extends Component {
       global.decrQuantity(id);
   }
   removeProduct(id) {
-      global.removeProduct(id);
+      // var delArray = this.props.cartArray.map(e => ({
+      //   id: e.id
+      // })) ;
+      // var deleteElement = delArray.id;
+      // var i = delArray.indexOf(deleteElement);
+      // if (i != -1) {
+      //   delArray.splice(i,1);
+      // }
+      // console.log(delArray);
+
+      global.removeProduct(id)
+
   }
   async onSendOrder() {
     try {
@@ -114,12 +125,19 @@ class Cart extends Component {
                           </TouchableOpacity>
                       </View>
                   </View>
-                  <TouchableOpacity onPress={()=> navigation.navigate('ProductDetail')}>
+                  <TouchableOpacity onPress={()=> {
+                    navigation.navigate({
+                      routeName: 'CartDetail',
+                      params: {
+                        data: product
+                      }
+                   })
+                  }}>
                     <Text style={{color: '#aab034'}}>Show Details</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={rightStyles}>
-                  <TouchableOpacity onPress={()=> this.deleteProduct()}>
+                  <TouchableOpacity onPress={()=> this.removeProduct(product.id)}>
                     <Image
                       style={deleteStyles}
                       source = {require ('../media/appIcon/delete.png')}

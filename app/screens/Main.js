@@ -11,6 +11,7 @@ import getCart from '../api/getCart';
 import Cart from './Cart';
 import Contact from './Contact';
 import ProductNavigator from '../navigations/ProductNavigator';
+import CartNavigator from '../navigations/CartNavigator';
 import Category from './Category';
 import Favorite from './Favorite';
 import Header from '../components/Header/Header';
@@ -135,7 +136,7 @@ class Main extends PureComponent{
             renderSelectedIcon = { () => <Image source = {require('../media/appIcon/cart0.png')} style={styles.tabStyles}/>}
             onPress={() => this.setState({ selectedTab: 'cart' })}
           >
-            <Cart />
+            <CartNavigator />
           </TabNavigator.Item>
 
           <TabNavigator.Item
