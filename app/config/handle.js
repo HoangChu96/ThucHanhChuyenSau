@@ -11,6 +11,7 @@ let category = url + 'app/product_by_type.php';
 let searchUrl = url + 'app/search.php?key=' ;
 let saleProduct = url + 'app/get_collection.php?page=${page}';
 let cart = url + 'app/cart.php';
+let orderHistory = url + 'app//order_history.php';
 
 module.exports = {
   productList: productList,
@@ -24,5 +25,6 @@ module.exports = {
   searchUrl : searchUrl,
   category: category,
   saleProduct: saleProduct,
-  cart: cart
+  cart: cart,
+  orderHistory: orderHistory
 }

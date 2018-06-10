@@ -52,8 +52,8 @@ class Cart extends Component {
     try {
       const token = await getToken();
       const arrayDetail = this.props.cartArray.map(e => ({
-          id: e.product.id,
-          quantity: e.quantity
+          id: e.id,
+          // quantity: e.quantity
       }));
       const kq = await sendOrder(token, arrayDetail);
       if (kq === 'THEM_THANH_CONG') {
