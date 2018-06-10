@@ -97,13 +97,17 @@ class ProductDetail extends Component{
 
         <ScrollView style={wrapper}>
           <View style={productStyles}>
-            <View style={leftStyles}>
+            <ScrollView style={leftStyles} horizontal>
               <Image
                 style={styles.imgStyles}
                 source={{ uri: url.product + product.images[0] }}
               />
+              <Image
+                style={styles.imgStyles}
+                source={{ uri: url.product + product.images[1] }}
+              />
 
-            </View>
+            </ScrollView>
             <View style={productStyles}>
               <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>
               <Text style={{color: 'purple'}}>PRICE: {product.price}$</Text>
@@ -177,8 +181,10 @@ const styles = StyleSheet.create({
     color: '#d74a67',
   },
   leftStyles:{
-    justifyContent: 'center',
-    alignItems: 'center'
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    flexDirection: 'row',
+    height: productHeight
   },
   rightStyles:{
     justifyContent: 'space-between'
