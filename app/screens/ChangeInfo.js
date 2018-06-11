@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,  Text,  View,  Image,
+  StyleSheet,  Text,  View,  Image, Alert,
   Dimensions,  TextInput,  TouchableOpacity
 } from 'react-native';
 
@@ -35,7 +35,7 @@ class ChangeInfo extends Component{
     onFail() {
         Alert.alert(
             'Notice',
-            'Email has been used by other',
+            'Error',
             [
                 { text: 'OK'}
             ],
@@ -48,7 +48,7 @@ class ChangeInfo extends Component{
     const { name, address, phone } = this.state;
     getToken()
     .then(token => changeInfo(token, name, phone, address))
-    .then(user => console.log(user))
+    .then(user => this.onSuccess())
     .catch(err => console.log(err));
   }
 
