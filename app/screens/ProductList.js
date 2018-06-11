@@ -24,11 +24,14 @@ class ProductList extends Component{
       refreshing: false,
       selectView: true,
 
-    }
+    };
+    console.log(this.props.productType);
   }
 
   componentDidMount(){
-    fetch(url.category)
+    const idType = this.props.productType.id;
+    console.log(idType);
+    fetch(url.category + idType)
     .then(res => res.json())
     .then((resJSON) => {
       const {product} = resJSON;
@@ -62,7 +65,7 @@ class ProductList extends Component{
 
   render(){
     const {goBack} =this.props.navigation;
-    const {productType} = this.props.navigation.state.params;
+    const {productType} = this.props;
     const {navigation} = this.props;
     const {
       container,body, header, productStyles, imgStyles,
@@ -125,7 +128,7 @@ class ProductList extends Component{
 }
 function mapStateToProps(state){
   return {
-    dataSource: state.dataSource,
+    types: state.types
   };
 }
 

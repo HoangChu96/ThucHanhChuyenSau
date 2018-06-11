@@ -15,6 +15,7 @@ class Cart extends Component {
   constructor(props){
     super(props);
     console.log(props.cartArray);
+    console.log(props.quantity);
   }
   alertPay(){
     Alert.alert(
@@ -154,7 +155,8 @@ class Cart extends Component {
 }
 function mapStateToProps(state){
   return{
-    cartArray: state.cartArray
+    cartArray: state.cartArray,
+    quantity: state.quantity
   };
 }
 export default connect(mapStateToProps)(Cart);

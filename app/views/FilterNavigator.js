@@ -7,6 +7,9 @@ import Filter from './Filter';
 import ProductList from './../screens/ProductList';
 
 class FilterNavigator extends Component{
+  constructor(props){
+    super(props);
+  }
 
   closeControlPanel = () => {
     this.drawer.close()
@@ -17,6 +20,7 @@ class FilterNavigator extends Component{
 
   render(){
     const { navigation } = this.props;
+    const {productType} = this.props.navigation.state.params;
     return (
       <Drawer
         ref= {(ref) => this.drawer = ref}
@@ -36,7 +40,7 @@ class FilterNavigator extends Component{
           main: { opacity:(2-ratio)/2 }
         })}
       >
-          <ProductList open={this.openControlPanel.bind(this)} navigation={navigation} />
+          <ProductList open={this.openControlPanel.bind(this)} navigation={navigation} productType= {productType} />
       </Drawer>
     )
   }

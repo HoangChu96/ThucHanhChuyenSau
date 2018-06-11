@@ -15,6 +15,7 @@ class ProductListView1 extends Component{
       selectedLike: false,
       selectedTab: false,
     };
+    console.log(props.dataSource);
   }
 
   render(){

@@ -6,7 +6,8 @@ const defaultState = {
   onSignIn: null,
   dataSource: [],
   cartShow: [],
-  searchArray: []
+  searchArray: [],
+  quantity: 1
 };
 
 const reducer = (state = defaultState, action) =>{
@@ -39,7 +40,8 @@ const reducer = (state = defaultState, action) =>{
   if(action.type === 'ADD_CART')
     return{
       ...state,
-      cartArray: state.cartArray.concat(action.cartArray)
+      cartArray: state.cartArray.concat(action.cartArray),
+      // quantity: state.quantity.concat(action.quantity)
     };
   if(action.type === 'SEARCH_PRODUCT'){
     return{

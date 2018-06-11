@@ -43,8 +43,7 @@ class ProductDetail extends Component{
       this.props.dispatch(
         {
           type: 'ADD_CART',
-          cartArray: product,
-          // quantity: 1
+          cartArray: product
         },
         () => saveCart(cartArray)
       );

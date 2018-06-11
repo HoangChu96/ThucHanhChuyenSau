@@ -4,7 +4,9 @@ App bán giày thể thao
 #Plan
 
 Cart: delete product | quatity | paypal | total price
-Profile: Edit Profile | avata 
+Profile: Edit Profile | avatar 
 Login: Login Facebook
 Product List: FilterFilter
-Category: by Type
+sale product: detail
+
+

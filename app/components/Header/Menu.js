@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Text, View, Image, StyleSheet, Alert, TouchableOpacity
+  Text, View, Image, StyleSheet, Alert, TouchableOpacity, CameraRoll, ScrollView
 } from 'react-native';
 import {firebaseApp} from '../FireBaseConfig';
 
@@ -12,7 +12,7 @@ import saveToken from '../../api/saveToken';
 class Menu extends Component{
   constructor(props){
     super(props);
-    this.state = { user: null };
+    this.state = { user: null};
     global.onSignIn = this.onSignIn.bind(this);
   }
 
@@ -67,6 +67,7 @@ class Menu extends Component{
   //   });
   // }
 
+
   render(){
     const {navigation} = this.props;
     const {container, profile, btnSignIn, signIn, btnMenu, btnText, userName, body} = styles;
@@ -111,10 +112,10 @@ class Menu extends Component{
 
     return (
       <View style={container}>
-        <Image
-          source={require('../../media/appIcon/profile.png')}
-          style={profile}
-        />
+          <Image
+            source={require('../../media/appIcon/profile.png')}
+            style={profile}
+          />
         {mainJSX}
       </View>
     )
