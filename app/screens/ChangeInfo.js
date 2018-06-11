@@ -22,25 +22,25 @@ class ChangeInfo extends Component{
   }
 
   onSuccess() {
-        Alert.alert(
-            'Notice',
-            'Change Info successfully',
-            [
-                { text: 'OK' }
-            ],
-            { cancelable: false }
-        );
-    }
+    Alert.alert(
+      'Notice',
+      'Change Info successfully',
+      [
+        { text: 'OK' }
+      ],
+      { cancelable: false }
+    );
+  }
 
     onFail() {
-        Alert.alert(
-            'Notice',
-            'Error',
-            [
-                { text: 'OK'}
-            ],
-            { cancelable: false }
-        );
+      Alert.alert(
+        'Notice',
+        'Error',
+        [
+          { text: 'OK'}
+        ],
+        { cancelable: false }
+      );
     }
 
 
