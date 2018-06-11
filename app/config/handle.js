@@ -10,6 +10,7 @@ let productList = url + 'app/productList.php?page=';
 let category = url + 'app/product_by_type.php?id_type=';
 let searchUrl = url + 'app/search.php?key=' ;
 let saleProduct = url + 'app/get_collection.php?page=';
+let saleMain = url + 'app/get_sale_main.php';
 let cart = url + 'app/cart.php';
 let orderHistory = url + 'app//order_history.php';
 
@@ -25,6 +26,7 @@ module.exports = {
   searchUrl : searchUrl,
   category: category,
   saleProduct: saleProduct,
+  saleMain: saleMain,
   cart: cart,
   orderHistory: orderHistory
 }

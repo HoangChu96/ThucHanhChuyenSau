@@ -47,7 +47,6 @@ class Main extends PureComponent{
         (e) => { console.log(e)}
       );
 
-      console.log('aa');
       // const list = await getCart(); 
       // await getCart();
       await getCart()
@@ -56,10 +55,22 @@ class Main extends PureComponent{
         //   // const {cartArray} = this.props;
         //   this.props.dispatch({ type: 'ADD_CART', cartArray: product })
         // });
-      console.log(this.props.cartArray);
 
+      fetch(url.saleMain)
+      .then(res => res.json())
+      .then((responsive) => {
+        const {sale} = responsive;
+        this.props.dispatch({
+          type: 'SALEPRODUCT',
+          saleArray: sale
+        });
+      })
+      .catch(
+        (e) => {console.log(e)}
+      );
   }
 
+  //thêm sản phẩm vào giỏ hàng, nếu sản phẩm đã tồn tại thì alert k cho thêm.
   cartArray(product){
     const isExits = this.state.cart.some(e.product.id === product.id);
     if(isExits) return false;
@@ -160,7 +171,8 @@ function mapStateToProps(state){
   return {
     types: state.types,
     topProducts: state.topProducts,
-    cartArray: state.cartArray
+    cartArray: state.cartArray,
+    saleArray: state.saleArray
   };
 }
 

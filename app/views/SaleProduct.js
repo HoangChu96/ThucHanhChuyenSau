@@ -3,12 +3,14 @@ import {
   StyleSheet,  Text,  View,
   TouchableOpacity,  Image,  Dimensions
 } from 'react-native';
+import { connect } from 'react-redux';
+import url from '../config/handle';
 
 const {height, width} = Dimensions.get('window');
 
-export default class SaleProduct extends Component {
+class SaleProduct extends Component {
   render() {
-    const {navigation} = this.props;
+    const {navigation, saleArray} = this.props;
     
     return (
       <View style={styles.wrapper}>
@@ -17,102 +19,52 @@ export default class SaleProduct extends Component {
         </View>
 
         <View style={styles.body}>
-          <View style={styles.productContainer}>
-            <TouchableOpacity onPress = {() => navigation.navigate('ProductDetail')}>
-              <View style={styles.label_wrapper}>
-                  <View style={styles.label}>
-                      <Image
-                        style={styles.imgLabel}
-                        source={require('../media/appIcon/label.png')}
-                      />
-                      {/* <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
+          {
+            saleArray.map(e => (
+              <View style={styles.productContainer} key={e.id} >
+                <TouchableOpacity onPress = {() => {
+                  navigation.navigate({
+                    routeName: 'ProductDetail',
+                    params: {
+                      product:e //truyền dữ liệu của 1 product sang detail
+                    }
+                  })
+                }}>
+                  <View style={styles.label_wrapper}>
+                    <View style={styles.label}>
+                        <Image
+                          style={styles.imgLabel}
+                          source={require('../media/appIcon/label.png')}
+                        />
+                        {/* <Text style={styles.cashback}>50%</Text>
+                        <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
+                    </View>
                   </View>
+                  <Image
+                    style={styles.imgStyles}
+                    source={{ uri: url.product + e.images[0] }}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
+                <View style={styles.row3}>
+                  <Text style={styles.productPrice}>{e.price}$</Text>
+                </View>
               </View>
-              <Image
-                style={styles.imgStyles}
-                source={require('../media/temp/sp1.jpg')}
-              />
-            </TouchableOpacity>
-            <Text style={styles.productName}>PRODUCT NAME</Text>
-            <View style={styles.row3}>
-              <Text style={styles.productPrice}>{'250$'}</Text>
-            </View>
-          </View>
-
-          <View style={styles.productContainer}>
-            <TouchableOpacity onPress = {() => navigation.navigate('ProductDetail')}>
-              <View style={styles.label_wrapper}>
-                  <View style={styles.label}>
-                      <Image
-                        style={styles.imgLabel}
-                        source={require('../media/appIcon/label.png')}
-                      />
-                      {/* <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
-                  </View>
-              </View>
-              <Image
-                style={styles.imgStyles}
-                source={require('../media/temp/sp2.jpg')}
-              />
-            </TouchableOpacity>
-            <Text style={styles.productName}>PRODUCT NAME</Text>
-            <View style={styles.row3}>
-              <Text style={styles.productPrice}>{'250$'}</Text>
-            </View>
-          </View>
-
-          <View style={styles.productContainer}>
-            <TouchableOpacity onPress = {() => navigation.navigate('ProductDetail')}>
-              <View style={styles.label_wrapper}>
-                  <View style={styles.label}>
-                      <Image
-                        style={styles.imgLabel}
-                        source={require('../media/appIcon/label.png')}
-                      />
-                      {/* <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
-                  </View>
-              </View>
-              <Image
-                style={styles.imgStyles}
-                source={require('../media/temp/sp3.jpg')}
-              />
-            </TouchableOpacity>
-            <Text style={styles.productName}>PRODUCT NAME</Text>
-            <View style={styles.row3}>
-              <Text style={styles.productPrice}>{'250$'}</Text>
-            </View>
-          </View>
-
-          <View style={styles.productContainer}>
-            <TouchableOpacity onPress = {() => navigation.navigate('ProductDetail')}>
-              <View style={styles.label_wrapper}>
-                  <View style={styles.label}>
-                      <Image
-                        style={styles.imgLabel}
-                        source={require('../media/appIcon/label.png')}
-                      />
-                      {/* <Text style={styles.cashback}>50%</Text>
-                      <Text style={styles.text}>{'Sale'.toUpperCase()}</Text> */}
-                  </View>
-              </View>
-              <Image
-                style={styles.imgStyles}
-                source={require('../media/temp/sp5.jpg')}
-              />
-            </TouchableOpacity>
-            <Text style={styles.productName}>PRODUCT NAME</Text>
-            <View style={styles.row3}>
-              <Text style={styles.productPrice}>{'250$'}</Text>
-            </View>
-          </View>
+            ))
+          }
         </View>
       </View>
     )
   }
 }
+
+function mapStateToProps(state){
+  return {
+    saleArray: state.saleArray
+  }
+}
+
+export default connect(mapStateToProps)(SaleProduct);
 
 const productWidth = (width - 60)/2;
 const productHeight = productWidth;

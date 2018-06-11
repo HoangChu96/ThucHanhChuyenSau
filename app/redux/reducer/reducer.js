@@ -5,6 +5,7 @@ const defaultState = {
   cartArray: [],
   onSignIn: null,
   dataSource: [],
+  saleArray: [],
   cartShow: [],
   searchArray: [],
   quantity: 1
@@ -36,6 +37,12 @@ const reducer = (state = defaultState, action) =>{
       dataSource: action.dataSource
     };
 
+  if(action.type === 'SALEPRODUCT')
+    return {
+      ...state,
+      saleArray: action.saleArray
+    };
+  
   //them sp vao gio hang
   if(action.type === 'ADD_CART')
     return{
