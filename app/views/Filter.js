@@ -11,7 +11,7 @@ class Filter extends Component {
     this.state = {
       value: 0,
       minValue:0,
-      maxValue: 50,
+      maxValue: 500,
       onCheck: false,
       PickerValueHolder : ''
     };
@@ -67,7 +67,7 @@ class Filter extends Component {
             </View>
             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <Text>{this.state.minValue}</Text>
-              <Text>{this.state.value}</Text>
+              <Text>{Math.round(this.state.value * this.state.maxValue)}</Text>
               <Text>{this.state.maxValue}</Text>
             </View>
             <Slider
@@ -77,6 +77,8 @@ class Filter extends Component {
               minimumTrackTintColor = '#34B089'
               maximunValue = {this.state.maxValue}
               maximumTrackTintColor = 'red'
+              // onSlidingComplete={}
+              step={0.1}
             />
           </View>
 

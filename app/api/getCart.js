@@ -8,7 +8,6 @@ const getCart = async () => {
         if (value !== null) {
             return JSON.parse(value);
         }
-
         return [];
     } catch (error) {
         return [];

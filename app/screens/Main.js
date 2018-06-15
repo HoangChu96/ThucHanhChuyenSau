@@ -12,8 +12,6 @@ import Cart from './Cart';
 import Contact from './Contact';
 import ProductNavigator from '../navigations/ProductNavigator';
 import CartNavigator from '../navigations/CartNavigator';
-import Category from './Category';
-import Favorite from './Favorite';
 import Header from '../components/Header/Header';
 import SearchView from './SearchView';
 import saveCart from '../api/saveCart';
@@ -26,8 +24,9 @@ class Main extends PureComponent{
       cart: []
     };
     global.gotoSearch = this.gotoSearch.bind(this);
-    global.gotoProductType = this.gotoProductType.bind(this);
-    props.cartArray = this.cartArray.bind(this);
+    // global.gotoProductType = this.gotoProductType.bind(this);
+
+    // props.cartArray = this.cartArray.bind(this);
     
 
   }
@@ -49,12 +48,17 @@ class Main extends PureComponent{
 
       // const list = await getCart(); 
       // await getCart();
-      await getCart()
-      .then(cart => this.setState({cart}));
         // .then(product => {
         //   // const {cartArray} = this.props;
         //   this.props.dispatch({ type: 'ADD_CART', cartArray: product })
         // });
+
+      await getCart()
+      .then(e => this.props.dispatch
+        ({ 
+          type: 'ADD_CART',
+          cartArray: e
+       }));
 
       fetch(url.saleMain)
       .then(res => res.json())
@@ -71,16 +75,18 @@ class Main extends PureComponent{
   }
 
   //thêm sản phẩm vào giỏ hàng, nếu sản phẩm đã tồn tại thì alert k cho thêm.
-  cartArray(product){
-    const isExits = this.state.cart.some(e.product.id === product.id);
-    if(isExits) return false;
-    this.setState(
-      {
-        cart: this.state.cart.concat({product})
-      },
-      () => saveCart(this.state.cartArray)
-    );
-  }
+  // cartArray(product){
+  //   const {cartArray} = this.props;
+  //   const isExits = this.state.cart.some(e.product.id === product.id);
+  //   if(isExits) return false;
+  //   this.props.dispatch(
+  //     {
+  //       type: 'ADD_CART',
+  //       cartArray: product
+  //     },
+  //     () => saveCart(cartArray)
+  //   );
+  // }
 
   gotoSearch() {
       this.setState({ selectedTab: 'search' });
@@ -95,7 +101,7 @@ class Main extends PureComponent{
   }
 
   render(){
-    const {navigation, cartArray} = this.props;
+    const {cartArray} = this.props;
     return (
       <View style={{flex:1}}>
         <Header onOpen={this.openMenu.bind(this)}/>

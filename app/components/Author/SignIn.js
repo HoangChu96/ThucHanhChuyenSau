@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
-import {firebaseApp} from '../FireBaseConfig';
 import signIn from '../../api/signIn';
 import global from '../../global';
 import saveToken from '../../api/saveToken';
@@ -61,10 +60,18 @@ class SignIn extends Component {
             global.onSignIn(res.user);
             this.props.goBack();
             saveToken(res.token);
+            
           })
           .catch(err =>
             console.log(err)
           );
+          this.props.dispatch(
+            {
+              type: 'SIGNIN',
+              isLogedIn: true
+            }
+          );
+
     }
 
     render() {
@@ -113,7 +120,8 @@ class SignIn extends Component {
 
 function mapStateToProps (state) {
   return {
-    onSignIn: state.onSignIn
+    onSignIn: state.onSignIn,
+    isLogedIn: state.isLogedIn
   }
 }
 

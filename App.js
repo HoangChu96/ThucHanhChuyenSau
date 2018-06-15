@@ -4,8 +4,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './app/redux/reducer/reducer';
 
-
 const store = createStore(reducer);
+
 
 class App extends Component {
   constructor(props){

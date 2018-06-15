@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import {
-  Text, View, Image, StyleSheet, Alert, TouchableOpacity, CameraRoll, ScrollView
+  Text, View, Image, StyleSheet, Alert, TouchableOpacity
 } from 'react-native';
-import {firebaseApp} from '../FireBaseConfig';
 
-import StackNavigator from 'react-navigation';
 import {connect} from 'react-redux';
 import global from '../../global';
 import saveToken from '../../api/saveToken';
 
+import ImagePicker from 'react-native-image-picker';
+
+//chọn ảnh
+var options = {
+  title: 'Select Avatar',
+  customButtons: [
+    {name: 'fb', title: 'Choose Photo from Facebook'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
+
 class Menu extends Component{
   constructor(props){
     super(props);
-    this.state = { user: null};
+    this.state = { 
+      user: null,
+      avatarSource: null
+    };
     global.onSignIn = this.onSignIn.bind(this);
   }
 
@@ -30,11 +45,18 @@ class Menu extends Component{
             onPress: () => {
               this.setState({ user: null })
               saveToken('')
-            }
+            },
+            
           }
         ],
         { cancelable: false }
       )
+      this.props.dispatch(
+        {
+          type: 'SIGNIN',
+          isLogedIn: false
+        }
+      );
   }
 
 //use firebase sign out;
@@ -67,6 +89,29 @@ class Menu extends Component{
   //   });
   // }
 
+  show() {
+    ImagePicker.showImagePicker(options, (response) => {
+      //bắt lỗi
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        let source = {
+          uri: response.uri
+        };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  }
 
   render(){
     const {navigation} = this.props;
@@ -112,10 +157,13 @@ class Menu extends Component{
 
     return (
       <View style={container}>
+        <TouchableOpacity onPress={this.show.bind(this)}>
           <Image
-            source={require('../../media/appIcon/profile.png')}
-            style={profile}
-          />
+              source={require('../../media/appIcon/profile.png')}
+              style={profile}
+            />
+        </TouchableOpacity>
+          
         {mainJSX}
       </View>
     )

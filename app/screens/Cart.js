@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text, Alert, View,
+  StyleSheet, Text, Alert, View, Linking,
   Image,  TouchableOpacity,  ScrollView
 } from 'react-native';
 import {connect} from 'react-redux';
@@ -9,12 +9,15 @@ import global from '../../app/global';
 import url from '../config/handle';
 import sendOrder from '../api/sendOrder';
 import getToken from '../api/getToken';
-import ProductDetail from './ProductDetail';
 
 class Cart extends Component {
   constructor(props){
     super(props);
-  }
+    this.state = {
+      cart: []
+    };
+  };
+
   alertPay(){
     Alert.alert(
       'Notice',
@@ -38,12 +41,12 @@ class Cart extends Component {
     )
   }
   
-  incrQuantity(id) {
-    global.incrQuantity(id);
-  }
-  decrQuantity(id) {
-    global.decrQuantity(id);
-  }
+  // incrQuantity(id) {
+  //   global.incrQuantity(id);
+  // }
+  // decrQuantity(id) {
+  //   global.decrQuantity(id);
+  // }
   removeProduct(id) {
     // var delArray = this.props.cartArray.map(e => ({
     //   id: e.id
@@ -58,6 +61,7 @@ class Cart extends Component {
     global.removeProduct(id)
     
   }
+
   async onSendOrder() {
     try {
       const token = await getToken();
@@ -96,6 +100,11 @@ class Cart extends Component {
   //   return sum;
   // }
   
+  //gọi đường dẫn đến paypal 
+  linkPressed(url){
+    Linking.openURL(url);
+  }
+
   render() {
     const {navigation, cartArray} = this.props;
     const {
@@ -103,7 +112,6 @@ class Cart extends Component {
       rightStyles, container, bottomStyles, numberOfProduct,
       deleteStyles, topStyles, txtTopStyles, productController
     } = styles;
-    
     
     const arrTotal = cartArray.map(e => parseInt(e.price));
     
@@ -115,7 +123,10 @@ class Cart extends Component {
       <View style={topStyles}>
       <Text style={txtTopStyles}>TOTAL ORDER:    {total}$</Text>
       <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
-      <Text style={txtTopStyles}>PAY</Text>
+         <Text style={txtTopStyles}>PAY</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=> this.linkPressed('https://www.paypal.me/Hoang26')}>
+         <Text style={txtTopStyles}>PayPal</Text>
       </TouchableOpacity>
       </View>
       
@@ -130,22 +141,12 @@ class Cart extends Component {
           />
           </View>
           <View style={bottomStyles}>
-          <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>
-          <Text style={{color: '#AFAEAF'}}>SIZE: </Text>
-          <Text style={{color: '#AFAEAF'}}>AMOUNT: </Text>
-          <Text style={{color: '#AFAEAF'}}>PRICE: {product.price}</Text>
-          <Text style={{color: '#AFAEAF'}}>TOTAL: </Text>
-          <Text style={{color: '#AFAEAF'}}></Text>
-          <View style={productController}>
-          <View style={numberOfProduct}>
-          <TouchableOpacity onPress={() => this.incrQuantity(product.id)}>
-          <Text>+</Text>
-          </TouchableOpacity>
-          <Text>{product.quantity}</Text>
-          <TouchableOpacity onPress={() => this.decrQuantity(product.id)}>
-          <Text>-</Text>
-          </TouchableOpacity>
-          </View>
+            <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>
+            <Text style={{color: '#AFAEAF'}}>SIZE: </Text>
+            <Text style={{color: '#AFAEAF'}}>PRICE: {product.price}</Text>
+            <Text style={{color: '#AFAEAF'}}>TOTAL: </Text>
+            <Text style={{color: '#AFAEAF'}}></Text>
+            <View style={productController}>
           </View>
           <TouchableOpacity onPress={()=> {
             navigation.navigate({

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity
 } from 'react-native';
-import {connect} from 'react-redux';
 import Drawer from 'react-native-drawer';
 
 import Main from './screens/Main';
@@ -15,7 +14,6 @@ import getCart from './api/getCart';
 class MainApp extends Component{
 
   componentDidMount() {
-    const {onSignIn} = this.props;
     getToken()
     .then(token => checkLogin(token))
     // .then(res => {this.props.dispatch({
@@ -60,13 +58,7 @@ class MainApp extends Component{
   }
 }
 
-function mapPropsToState (state) {
-  return {
-    onSignIn: state.onSignIn
-  }
-}
-
-export default connect()(MainApp);
+export default MainApp;
 
 const drawerStyles={
   drawer: {

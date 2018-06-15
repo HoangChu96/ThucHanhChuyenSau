@@ -5,7 +5,7 @@ import {
   Image, FlatList, ScrollView,
   RefreshControl, Alert
 } from 'react-native';
-import Swiper from 'react-native-swiper';
+import global from '../global';
 import url from '../config/handle';
 
 const {width, height} =Dimensions.get('window')

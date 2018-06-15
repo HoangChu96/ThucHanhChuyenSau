@@ -3,7 +3,7 @@ App bán giày thể thao
 
 #Plan
 
-Cart: | delete product | quatity | paypal |
+Cart: | delete product | paypal |
 Profile: | avatar |
 Login: | Login Facebook |
-Product List: | FilterFilter |
+Product List: | Filter |

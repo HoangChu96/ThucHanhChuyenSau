@@ -47,8 +47,7 @@ const reducer = (state = defaultState, action) =>{
   if(action.type === 'ADD_CART')
     return{
       ...state,
-      cartArray: state.cartArray.concat(action.cartArray),
-      // quantity: state.quantity.concat(action.quantity)
+      cartArray: state.cartArray.concat(action.cartArray)
     };
   if(action.type === 'SEARCH_PRODUCT'){
     return{
@@ -60,7 +59,7 @@ const reducer = (state = defaultState, action) =>{
   if(action.type === 'SIGNIN'){
     return {
       ...state,
-      onSignIn: action.onSignIn
+      isLogedIn: action.isLogedIn
     }
   }
   return state;

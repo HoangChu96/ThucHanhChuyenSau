@@ -5,12 +5,10 @@ import {
   Image, FlatList, ScrollView,
   RefreshControl, Alert
 } from 'react-native';
-import Swiper from 'react-native-swiper';
 
 import {connect} from 'react-redux';
 import url from '../config/handle';
 import saveCart from '../api/saveCart';
-import global from '../global';
 
 const {width, height} =Dimensions.get('window')
 
@@ -19,16 +17,16 @@ class ProductDetail extends Component{
     super(props);
     this.state = {
       cart: [],
-      isLognIn: true
+      isLognIn: true,
+      user: null,
     }
   }
 
   addThisProductToCart() {
     const { product } = this.props.navigation.state.params;
     const {cartArray} = this.props;
-
     
-    if(this.state.isLognIn !== null){
+    // if(this.props.isLogedIn === true){
       if(cartArray.some(e => (e.id) === product.id)) {
         Alert.alert(
           'Notice',
@@ -39,26 +37,34 @@ class ProductDetail extends Component{
           {cancelable: false}
         )
         return false;
-      };
-      this.props.dispatch(
-        {
-          type: 'ADD_CART',
-          cartArray: product
-        },
-        () => saveCart(cartArray)
-      );
+      }
+      else{
+        this.props.dispatch(
+          {
+            type: 'ADD_CART',
+            cartArray: product
+          }
+        );
+        saveCart([
+          ...cartArray,
+          product
+        ]);
+        // console.log('*****ADD CART******');
+        // console.log(cartArray);
+      }
+      
     }
-    else{
-      Alert.alert(
-        'Notice',
-        'You are not logged in',
-        [
-          {text: 'OK'}
-        ],
-        {cancelable: false}
-      )
-      return false;
-    }
+    // else{
+    //   Alert.alert(
+    //     'Notice',
+    //     'You are not logged in',
+    //     [
+    //       {text: 'OK'}
+    //     ],
+    //     {cancelable: false}
+    //   )
+    //   return false;
+    // }
     
     // this.setState(
     //   {
@@ -66,7 +72,7 @@ class ProductDetail extends Component{
     //   },
     //   () => saveCart(this.state.cartArray)
     // );
-  }
+  // }
 
   render(){
     const {navigation} = this.props;
@@ -134,7 +140,8 @@ class ProductDetail extends Component{
 function mapStateToProps(state){
   return{
     cartArray: state.cartArray,
-    quantity: state.quantity
+    quantity: state.quantity,
+    isLogedIn: state.isLogedIn
   }
 }
 export default connect(mapStateToProps)(ProductDetail);

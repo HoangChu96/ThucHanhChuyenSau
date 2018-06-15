@@ -1,4 +1,4 @@
-let url = 'http://192.168.0.76/';
+let url = 'http://192.168.0.73/';
 let loginUrl =  url + 'app/login.php';
 let registerUrl = url + 'app/register.php';
 let changeInfoUrl = url + 'app/change_info.php';
