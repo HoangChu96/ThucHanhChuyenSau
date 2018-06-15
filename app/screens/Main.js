@@ -24,11 +24,6 @@ class Main extends PureComponent{
       cart: []
     };
     global.gotoSearch = this.gotoSearch.bind(this);
-    // global.gotoProductType = this.gotoProductType.bind(this);
-
-    // props.cartArray = this.cartArray.bind(this);
-    
-
   }
 
   async componentDidMount(){
@@ -45,13 +40,6 @@ class Main extends PureComponent{
       .catch(
         (e) => { console.log(e)}
       );
-
-      // const list = await getCart(); 
-      // await getCart();
-        // .then(product => {
-        //   // const {cartArray} = this.props;
-        //   this.props.dispatch({ type: 'ADD_CART', cartArray: product })
-        // });
 
       await getCart()
       .then(e => this.props.dispatch
@@ -73,20 +61,6 @@ class Main extends PureComponent{
         (e) => {console.log(e)}
       );
   }
-
-  //thêm sản phẩm vào giỏ hàng, nếu sản phẩm đã tồn tại thì alert k cho thêm.
-  // cartArray(product){
-  //   const {cartArray} = this.props;
-  //   const isExits = this.state.cart.some(e.product.id === product.id);
-  //   if(isExits) return false;
-  //   this.props.dispatch(
-  //     {
-  //       type: 'ADD_CART',
-  //       cartArray: product
-  //     },
-  //     () => saveCart(cartArray)
-  //   );
-  // }
 
   gotoSearch() {
       this.setState({ selectedTab: 'search' });
@@ -118,18 +92,6 @@ class Main extends PureComponent{
           >
             <ProductNavigator />
           </TabNavigator.Item>
-
-          {/* <TabNavigator.Item
-            style={styles.wapper}
-            selected={this.state.selectedTab === 'category'}
-            title="Category"
-            selectedTitleStyle={{color: '#34B089'}}
-            renderIcon = {() => <Image source = {require('../media/appIcon/category0.png')} style={styles.tabStyles} />}
-            renderSelectedIcon = { () => <Image source = {require('../media/appIcon/category.png')} style={styles.tabStyles}/>}
-            onPress={() => this.setState({ selectedTab: 'category' })}
-          >
-            <Category navigation={navigation} />
-          </TabNavigator.Item> */}
 
           <TabNavigator.Item
             style={styles.wapper}
