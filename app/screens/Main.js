@@ -20,10 +20,10 @@ class Main extends PureComponent{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab:'home',
-      cart: []
+      selectedTab:'home'
     };
     global.gotoSearch = this.gotoSearch.bind(this);
+    global.removeProduct = this.removeProduct.bind(this);
   }
 
   async componentDidMount(){
@@ -60,6 +60,17 @@ class Main extends PureComponent{
       .catch(
         (e) => {console.log(e)}
       );
+  }
+
+  removeProduct(productId) {
+    const {cartArray} = this.props;
+    const product = this.props.cartArray.filter(e => e.id !== productId);
+    this.props.dispatch({ 
+      type: 'DELETE_CART',
+      cartArray: product
+    });
+    // saveCart(cartArray);
+    // console.log(cartArray);
   }
 
   gotoSearch() {

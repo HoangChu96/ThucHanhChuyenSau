@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
   StyleSheet, Text, Alert, View, Linking,
-  Image,  TouchableOpacity,  ScrollView
+  Image, TouchableOpacity, ScrollView
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import global from '../../app/global';
 import url from '../config/handle';
@@ -11,55 +11,39 @@ import sendOrder from '../api/sendOrder';
 import getToken from '../api/getToken';
 
 class Cart extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       cart: []
     };
   };
 
-  alertPay(){
+  alertPay() {
     Alert.alert(
       'Notice',
       'Please choise payment method',
       [
-        { text: 'Direct'},
-        {text: 'Paypal'}
+        { text: 'Direct' },
+        { text: 'Paypal' }
       ],
       { cancelable: false }
     )
   }
-  deleteProduct(){
+  deleteProduct() {
     Alert.alert(
       'Notice',
       'Are you sure delete',
       [
-        {text: 'No'},
-        {text: 'Yes'}
+        { text: 'No' },
+        { text: 'Yes' }
       ],
       { cancelable: false }
     )
   }
-  
-  // incrQuantity(id) {
-  //   global.incrQuantity(id);
-  // }
-  // decrQuantity(id) {
-  //   global.decrQuantity(id);
-  // }
+
   removeProduct(id) {
-    // var delArray = this.props.cartArray.map(e => ({
-    //   id: e.id
-    // })) ;
-    // var deleteElement = delArray.id;
-    // var i = delArray.indexOf(deleteElement);
-    // if (i != -1) {
-    //   delArray.splice(i,1);
-    // }
-    // console.log(delArray);
-    
     global.removeProduct(id)
-    
+
   }
 
   async onSendOrder() {
@@ -75,7 +59,7 @@ class Cart extends Component {
           'Notice',
           'Sucessfully',
           [
-            {text: 'Cancel'}
+            { text: 'Cancel' }
           ],
           { cancelable: false }
         )
@@ -85,7 +69,7 @@ class Cart extends Component {
           'Notice',
           'Fail',
           [
-            {text: 'Cancel'}
+            { text: 'Cancel' }
           ],
           { cancelable: false }
         )
@@ -99,84 +83,84 @@ class Cart extends Component {
   //   let sum = someArray.reduce((sum, x) => sum + x);
   //   return sum;
   // }
-  
+
   //gọi đường dẫn đến paypal 
-  linkPressed(url){
+  linkPressed(url) {
     Linking.openURL(url);
   }
 
   render() {
-    const {navigation, cartArray} = this.props;
+    const { navigation, cartArray } = this.props;
     const {
       productStyles, leftStyles, imgStyles,
       rightStyles, container, bottomStyles, numberOfProduct,
       deleteStyles, topStyles, txtTopStyles, productController
     } = styles;
-    
+
     const arrTotal = cartArray.map(e => parseInt(e.price));
-    
+
     // const total =  arrTotal.length? this.getArraySummation(arrTotal) :0;
     const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
-    
+
     return (
       <View style={container}>
-      <View style={topStyles}>
-      <Text style={txtTopStyles}>TOTAL ORDER:    {total}$</Text>
-      <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
-         <Text style={txtTopStyles}>PAY</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={()=> this.linkPressed('https://www.paypal.me/Hoang26')}>
-         <Text style={txtTopStyles}>PayPal</Text>
-      </TouchableOpacity>
-      </View>
-      
-      <ScrollView>
-      {
-        cartArray.map(product => (
-          <View style={productStyles} key={product.id}>
-          <View style={leftStyles}>
-          <Image
-          style={imgStyles}
-          source={{uri: url.product + product.images[0]}}
-          />
-          </View>
-          <View style={bottomStyles}>
-            <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>
-            <Text style={{color: '#AFAEAF'}}>SIZE: </Text>
-            <Text style={{color: '#AFAEAF'}}>PRICE: {product.price}</Text>
-            <Text style={{color: '#AFAEAF'}}>TOTAL: </Text>
-            <Text style={{color: '#AFAEAF'}}></Text>
-            <View style={productController}>
-          </View>
-          <TouchableOpacity onPress={()=> {
-            navigation.navigate({
-              routeName: 'CartDetail',
-              params: {
-                data: product
-              }
-            })
-          }}>
-          <Text style={{color: '#aab034'}}>Show Details</Text>
+        <View style={topStyles}>
+          <Text style={txtTopStyles}>TOTAL ORDER:    {total}$</Text>
+          <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
+            <Text style={txtTopStyles}>PAY</Text>
           </TouchableOpacity>
-          </View>
-          <View style={rightStyles}>
-          <TouchableOpacity onPress={()=> this.removeProduct(product.id)}>
-          <Image
-          style={deleteStyles}
-          source = {require ('../media/appIcon/delete.png')}
-          />
+          <TouchableOpacity onPress={() => this.linkPressed('https://www.paypal.me/Hoang26')}>
+            <Text style={txtTopStyles}>PayPal</Text>
           </TouchableOpacity>
-          </View>
-          </View>
-        ))
-      }
-      </ScrollView>
+        </View>
+
+        <ScrollView>
+          {
+            cartArray.map(product => (
+              <View style={productStyles} key={product.id}>
+                <View style={leftStyles}>
+                  <Image
+                    style={imgStyles}
+                    source={{ uri: url.product + product.images[0] }}
+                  />
+                </View>
+                <View style={bottomStyles}>
+                  <Text style={{ fontSize: 18, color: '#34B089' }}>{product.name.toUpperCase()}</Text>
+                  <Text style={{ color: '#AFAEAF' }}>SIZE: </Text>
+                  <Text style={{ color: '#AFAEAF' }}>PRICE: {product.price}</Text>
+                  <Text style={{ color: '#AFAEAF' }}>TOTAL: </Text>
+                  <Text style={{ color: '#AFAEAF' }}></Text>
+                  <View style={productController}>
+                  </View>
+                  <TouchableOpacity onPress={() => {
+                    navigation.navigate({
+                      routeName: 'CartDetail',
+                      params: {
+                        data: product
+                      }
+                    })
+                  }}>
+                    <Text style={{ color: '#aab034' }}>Show Details</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={rightStyles}>
+                  <TouchableOpacity onPress={() => this.removeProduct(product.id)}>
+                    <Image
+                      style={deleteStyles}
+                      source={require('../media/appIcon/delete.png')}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))
+          }
+        </ScrollView>
       </View>
     );
   }
 }
-function mapStateToProps(state){
-  return{
+function mapStateToProps(state) {
+  return {
     cartArray: state.cartArray,
     quantity: state.quantity
   };
@@ -184,26 +168,26 @@ function mapStateToProps(state){
 export default connect(mapStateToProps)(Cart);
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: '#DBDBD8'
   },
-  productStyles:{
+  productStyles: {
     flex: 1,
     backgroundColor: '#fff',
-    padding:10,
+    padding: 10,
     borderColor: '#AFAEAF',
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: 10,
     marginBottom: 0
   },
-  leftStyles:{
+  leftStyles: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  bottomStyles:{
+  bottomStyles: {
     flex: 1,
     paddingLeft: 10,
     justifyContent: 'center',
@@ -216,27 +200,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
-  topStyles:{
+  topStyles: {
     flexDirection: 'row',
-    backgroundColor:'#fff',
-    justifyContent:'space-between',
-    alignItems:'center',
+    backgroundColor: '#fff',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10
   },
-  txtTopStyles:{
+  txtTopStyles: {
     color: '#34B089'
   },
-  rightStyles:{
+  rightStyles: {
     flex: 1,
     paddingLeft: 10,
     justifyContent: 'flex-start',
     alignItems: 'flex-end'
   },
-  imgStyles:{
+  imgStyles: {
     width: 100,
     height: 100
   },
-  deleteStyles:{
+  deleteStyles: {
     width: 14,
     height: 14
   }

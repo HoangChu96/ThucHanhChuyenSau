@@ -48,7 +48,16 @@ const reducer = (state = defaultState, action) =>{
     return{
       ...state,
       cartArray: state.cartArray.concat(action.cartArray)
+      // cartArray: []
     };
+
+    //xóa một sản phẩm trong giỏ hàng
+  if(action.type === 'DELETE_CART')
+    return{
+      ...state,
+      cartArray: action.cartArray
+    };
+
   if(action.type === 'SEARCH_PRODUCT'){
     return{
       ...state,
