@@ -1,6 +1,6 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import {
-  Text, View, StyleSheet, Image, TouchableOpacity
+  View, StyleSheet, Image
 } from 'react-native';
 import {connect} from 'react-redux';
 
@@ -8,13 +8,11 @@ import url from '../config/handle';
 import global from '../global';
 import TabNavigator from 'react-native-tab-navigator';
 import getCart from '../api/getCart';
-import Cart from './Cart';
 import Contact from './Contact';
 import ProductNavigator from '../navigations/ProductNavigator';
 import CartNavigator from '../navigations/CartNavigator';
 import Header from '../components/Header/Header';
 import SearchView from './SearchView';
-import saveCart from '../api/saveCart';
 
 class Main extends PureComponent{
   constructor(props){
@@ -63,14 +61,11 @@ class Main extends PureComponent{
   }
 
   removeProduct(productId) {
-    const {cartArray} = this.props;
     const product = this.props.cartArray.filter(e => e.id !== productId);
     this.props.dispatch({ 
       type: 'DELETE_CART',
       cartArray: product
     });
-    // saveCart(cartArray);
-    // console.log(cartArray);
   }
 
   gotoSearch() {

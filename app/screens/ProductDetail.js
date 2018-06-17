@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
 import {
   View, Text,Dimensions,
-  StyleSheet, TouchableOpacity,
-  Image, FlatList, ScrollView,
-  RefreshControl, Alert
+  StyleSheet, TouchableOpacity,Image, ScrollView, Alert
 } from 'react-native';
 
 import {connect} from 'react-redux';
 import url from '../config/handle';
 import saveCart from '../api/saveCart';
 
-const {width, height} =Dimensions.get('window')
+const {width} =Dimensions.get('window')
 
 class ProductDetail extends Component{
   constructor(props){
@@ -49,8 +47,6 @@ class ProductDetail extends Component{
           ...cartArray,
           product
         ]);
-        // console.log('*****ADD CART******');
-        // console.log(cartArray);
       }
       
     }

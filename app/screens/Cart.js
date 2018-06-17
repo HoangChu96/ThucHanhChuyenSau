@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import {
   StyleSheet, Text, Alert, View, Linking,
   Image, TouchableOpacity, ScrollView
@@ -9,6 +9,7 @@ import global from '../../app/global';
 import url from '../config/handle';
 import sendOrder from '../api/sendOrder';
 import getToken from '../api/getToken';
+import PayPal from 'react-native-paypal-wrapper';
 
 class Cart extends Component {
   constructor(props) {
@@ -79,6 +80,21 @@ class Cart extends Component {
     }
   }
 
+  paypal (){
+    const { cartArray } = this.props;
+    const arrTotal = cartArray.map(e => parseInt(e.price));
+    const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
+
+    PayPal.initialize(PayPal.SANDBOX, "AZo3jL5hSdGYmKnzvx6VBGGURIb2aTi9eY0L8rfUJ8cmsa5xSYuQg9bx06nLP5N6iL_B7cYo78b5GDKh");
+    PayPal.pay({
+      price: '40',
+      currency: 'USD',
+      description: 'Your description goes here',
+    })
+    .then(confirm => console.log(confirm))
+    .catch(error => console.log(error));
+  }
+
   // getArraySummation(someArray) {
   //   let sum = someArray.reduce((sum, x) => sum + x);
   //   return sum;
@@ -92,8 +108,8 @@ class Cart extends Component {
   render() {
     const { navigation, cartArray } = this.props;
     const {
-      productStyles, leftStyles, imgStyles,
-      rightStyles, container, bottomStyles, numberOfProduct,
+      productStyles, leftStyles, imgStyles, btnPay,
+      rightStyles, container, bottomStyles,
       deleteStyles, topStyles, txtTopStyles, productController
     } = styles;
 
@@ -107,10 +123,14 @@ class Cart extends Component {
         <View style={topStyles}>
           <Text style={txtTopStyles}>TOTAL ORDER:    {total}$</Text>
           <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
-            <Text style={txtTopStyles}>PAY</Text>
+            <Text style={btnPay}>PAY</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.linkPressed('https://www.paypal.me/Hoang26')}>
-            <Text style={txtTopStyles}>PayPal</Text>
+          {/* <TouchableOpacity onPress={() => this.linkPressed('https://www.paypal.me/Hoang26')}>
+            <Text style={btnPay}>PayPal</Text>
+          </TouchableOpacity> */}
+
+          <TouchableOpacity onPress={() =>  this.paypal()}>
+            <Text style={btnPay}>PayPal</Text>
           </TouchableOpacity>
         </View>
 
@@ -209,6 +229,13 @@ const styles = StyleSheet.create({
   },
   txtTopStyles: {
     color: '#34B089'
+  },
+  btnPay: {
+    backgroundColor: '#34B089',
+    color: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    fontWeight: 'bold'
   },
   rightStyles: {
     flex: 1,

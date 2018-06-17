@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text,  View,  Image, TextInput, Dimensions,
-  TouchableOpacity, KeyboardAvoidingView,  AsyncStorage
+  StyleSheet, Text,  View,  Image, TouchableOpacity
 } from 'react-native';
-import {  StackNavigator } from 'react-navigation';
 
 import SignIn from '../components/Author/SignIn';
 import SignUp from '../components/Author/SignUp';
-
-const {height} = Dimensions.get('window');
 
 export default class Authentication extends Component{
   constructor(props){
@@ -28,12 +24,9 @@ export default class Authentication extends Component{
 
   render(){
     const {
-      wrapper, row1,iconStyle, titleStyle,
-      inputStyle, btnInputStyle, btnText,
       btnContainer, btnSignIn, btnSignUp,
-      isSignInStyle, signInStyle, text
+      isSignInStyle, signInStyle
     }= styles;
-    const {navigation} = this.props;
     const {goBack} = this.props.navigation;
 
     const mainJSX = this.state.isLognIn ? <SignIn goBack= {goBack} /> : <SignUp gotoSignIn={this.signIn.bind(this)} />;

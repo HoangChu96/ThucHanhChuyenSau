@@ -75,7 +75,6 @@ class SignIn extends Component {
     }
 
     render() {
-        const {navigation} = this.props;
         const { btnText, inputStyle, btnInputStyle, text } = styles;
         const { email, password } = this.state;
         return (

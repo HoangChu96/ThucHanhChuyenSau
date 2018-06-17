@@ -5,7 +5,6 @@ import {
 import { AppRegistry } from 'react-native';
 import App from './App';
 import Splash from './app/screens/Splash';
-import Payments from './app/views/payments';
 
 class Begin extends Component {
 	constructor(props){
@@ -14,7 +13,7 @@ class Begin extends Component {
 			currentScreen: 'Splash'
 		};
 		setTimeout( () => {
-			this.setState({currentScreen: 'payments'})
+			this.setState({currentScreen: 'App'})
 		}, 2500);
 		// global.PaymentRequest = require('react-native-payments').PaymentRequest;
 	}

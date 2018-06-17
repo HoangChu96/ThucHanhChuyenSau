@@ -116,7 +116,7 @@ class Menu extends Component{
   render(){
     const {navigation} = this.props;
     const {container, profile, btnSignIn, signIn, btnMenu, btnText, userName, body} = styles;
-   const {user} = this.state;
+   const {user, avatarSource} = this.state;
 
     const logOutJSX = (
       <View style={container}>
@@ -155,14 +155,18 @@ class Menu extends Component{
 
     const mainJSX = this.state.user ? logInJSX : logOutJSX;
 
+    let img = avatarSource == null ? 
+      <Image
+        source={require('../../media/appIcon/profile.png')}
+        style={profile}
+      /> :
+      <Image source={this.state.avatarSource} style={profile}/>
+
     return (
       <View style={container}>
         <TouchableOpacity onPress={this.show.bind(this)}>
-          <Image
-              source={require('../../media/appIcon/profile.png')}
-              style={profile}
-            />
-        </TouchableOpacity>
+          {img}
+        </TouchableOpacity>      
           
         {mainJSX}
       </View>

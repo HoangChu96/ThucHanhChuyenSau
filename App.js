@@ -13,8 +13,8 @@ const logger = store => next => action => {
   }
   return result;
 }
-const store = createStore(reducer, applyMiddleware(logger));
 
+const store = createStore(reducer, applyMiddleware(logger));
 
 class App extends Component {
   constructor(props) {
