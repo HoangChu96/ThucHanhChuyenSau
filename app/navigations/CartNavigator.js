@@ -5,12 +5,13 @@ import {
 } from 'react-navigation';
 import Cart from '../screens/Cart';
 import CartDetail from '../screens/CartDetail';
-
+import InfoBuyer from '../screens/InfoBuyer';
 
 const CartNav = StackNavigator(
   {
     Cart: {screen: Cart},
-    CartDetail: {screen: CartDetail}
+    CartDetail: {screen: CartDetail},
+    InfoBuyer: {screen: InfoBuyer}
   },
   {
     headerMode: 'none',
@@ -20,7 +21,7 @@ const CartNav = StackNavigator(
     },
     transitionConfig: () => ({
       transitionSpec: {
-        duration: 300,
+        duration: 100,
       },
       screenInterpolator: sceneProps => {
         const { layout, position, scene } = sceneProps;

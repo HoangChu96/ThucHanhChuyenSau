@@ -48,14 +48,13 @@ class ChangeInfo extends Component{
     const { name, address, phone } = this.state;
     getToken()
     .then(token => changeInfo(token, name, phone, address))
-    .then(user => this.onSuccess())
+    .then(user => this.onSuccess(user))
     .catch(err => console.log(err));
   }
 
   render(){
-    const {navigation} = this.props;
     const {goBack} = this.props.navigation;
-   const { name, address, phone } = this.props.navigation.state.params;
+    const { name, address, phone } = this.props.navigation.state.params;
     // const { phone, address, name} = this.state;
     const { wrapper, body, row1, titleStyle, iconStyle, inputStyle, btnInputStyle, btnText, container} = styles;
 

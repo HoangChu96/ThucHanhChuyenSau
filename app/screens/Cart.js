@@ -17,30 +17,27 @@ class Cart extends Component {
     this.state = {
       cart: []
     };
+    this.onCheckOut = this.onCheckOut.bind(this);
   };
-
-  alertPay() {
+  onCheckOut(){
+    const {navigation} = this.props;
     Alert.alert(
       'Notice',
       'Please choise payment method',
       [
-        { text: 'Direct' },
-        { text: 'Paypal' }
+        { 
+          text: 'Direct' ,
+          onPress: ()=> {navigation.navigate({ routeName: 'InfoBuyer'})}
+        },
+        {
+          text: 'Paypal' ,
+          onPress: ()=> this.paypal()
+        },
+        {text: 'Cancel'}
       ],
-      { cancelable: false }
+      { cancelable: true }
     )
-  }
-  deleteProduct() {
-    Alert.alert(
-      'Notice',
-      'Are you sure delete',
-      [
-        { text: 'No' },
-        { text: 'Yes' }
-      ],
-      { cancelable: false }
-    )
-  }
+  };
 
   removeProduct(id) {
     global.removeProduct(id)
@@ -51,8 +48,7 @@ class Cart extends Component {
     try {
       const token = await getToken();
       const arrayDetail = this.props.cartArray.map(e => ({
-        id: e.id,
-        // quantity: e.quantity
+        id: e.id
       }));
       const kq = await sendOrder(token, arrayDetail);
       if (kq === 'THEM_THANH_CONG') {
@@ -87,7 +83,7 @@ class Cart extends Component {
 
     PayPal.initialize(PayPal.SANDBOX, "AZo3jL5hSdGYmKnzvx6VBGGURIb2aTi9eY0L8rfUJ8cmsa5xSYuQg9bx06nLP5N6iL_B7cYo78b5GDKh");
     PayPal.pay({
-      price: '40',
+      price: '' +total,
       currency: 'USD',
       description: 'Your description goes here',
     })
@@ -108,8 +104,8 @@ class Cart extends Component {
   render() {
     const { navigation, cartArray } = this.props;
     const {
-      productStyles, leftStyles, imgStyles, btnPay,
-      rightStyles, container, bottomStyles,
+      productStyles, leftStyles, imgStyles, txtCheck,
+      rightStyles, container, bottomStyles, btnCheckOut, viewCheckOut,
       deleteStyles, topStyles, txtTopStyles, productController
     } = styles;
 
@@ -122,16 +118,7 @@ class Cart extends Component {
       <View style={container}>
         <View style={topStyles}>
           <Text style={txtTopStyles}>TOTAL ORDER:    {total}$</Text>
-          <TouchableOpacity onPress={this.onSendOrder.bind(this)}>
-            <Text style={btnPay}>PAY</Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity onPress={() => this.linkPressed('https://www.paypal.me/Hoang26')}>
-            <Text style={btnPay}>PayPal</Text>
-          </TouchableOpacity> */}
 
-          <TouchableOpacity onPress={() =>  this.paypal()}>
-            <Text style={btnPay}>PayPal</Text>
-          </TouchableOpacity>
         </View>
 
         <ScrollView>
@@ -175,14 +162,18 @@ class Cart extends Component {
             ))
           }
         </ScrollView>
+        <View style={viewCheckOut}> 
+          <TouchableOpacity style={btnCheckOut} onPress={this.onCheckOut.bind(this)} >
+            <Text style={txtCheck} >Check Out</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    cartArray: state.cartArray,
-    quantity: state.quantity
+    cartArray: state.cartArray
   };
 }
 export default connect(mapStateToProps)(Cart);
@@ -203,14 +194,20 @@ const styles = StyleSheet.create({
     marginBottom: 0
   },
   leftStyles: {
-    flex: 1,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center'
   },
   bottomStyles: {
-    flex: 1,
+    flex: 5,
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  rightStyles: {
+    flex: 1,
+    paddingLeft: 10,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end'
   },
   productController: {
     flexDirection: 'row'
@@ -230,18 +227,22 @@ const styles = StyleSheet.create({
   txtTopStyles: {
     color: '#34B089'
   },
-  btnPay: {
-    backgroundColor: '#34B089',
-    color: '#fff',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    fontWeight: 'bold'
+  viewCheckOut: {
+    margin: 10,
   },
-  rightStyles: {
-    flex: 1,
-    paddingLeft: 10,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end'
+  btnCheckOut: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    // height: 50,
+    backgroundColor:'#34B089',
+    // width,
+    borderRadius: 10
+  },
+  txtCheck:{
+    color: '#fff',
+    fontWeight: 'bold',
+    padding: 10,
+    fontSize: 18
   },
   imgStyles: {
     width: 100,

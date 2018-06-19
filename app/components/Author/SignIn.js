@@ -97,15 +97,6 @@ class SignIn extends Component {
                 <Text style={btnText}>SIGN IN NOW</Text>
               </TouchableOpacity>
             </KeyboardAvoidingView>
-
-            <View style={text}>
-              <Text style={{color:'#fff'}}>OR</Text>
-            </View>
-
-            <TouchableOpacity style={btnInputStyle}>
-              <Text style={btnText}>LOGIN FACEBOOK</Text>
-            </TouchableOpacity>
-
             <View style={{flexDirection:'row',justifyContent:'center', margin:10}}>
               <Text style={btnText}>You forget Password: </Text>
               <TouchableOpacity>

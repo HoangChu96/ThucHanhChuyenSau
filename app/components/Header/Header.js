@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+﻿import React , {Component} from 'react';
 import {
   Text,  View,  TextInput, Image,
   Slider, StyleSheet,  Dimensions,
@@ -73,7 +73,7 @@ class Header extends Component{
             source={require('../../media/appIcon/ic_menu.png')}
           />
         </TouchableOpacity>
-        <Text style={styles.titleStyle}>SPORT SHOES</Text>
+        <Text style={styles.titleStyle}>MyShoes</Text>
         <Text />
       </View>
     );

@@ -23,7 +23,7 @@ class ProductList extends Component{
       page: 1,
       refreshing: false,
       selectView: true,
-
+      view1: true
     };
     console.log(this.props.productType);
   }
@@ -51,11 +51,15 @@ class ProductList extends Component{
   view1(){
     this.setState({
       selectView: true,
+      view1: true
     });
   };
   //set hien thi view 2
   view2(){
-    this.setState({selectView: false});
+    this.setState({
+      selectView: false,
+      view1: false
+    });
   };
 
   openMenu(){
@@ -68,8 +72,7 @@ class ProductList extends Component{
     const {productType} = this.props;
     const {navigation} = this.props;
     const {
-      container,body, header, productStyles, imgStyles,
-      leftStyles, rightStyles, textStyles, selectView
+      container,body, header, txtFilter, selectView
     } = styles;
 
     //goi den list view 1
@@ -104,19 +107,19 @@ class ProductList extends Component{
           <View style={selectView}>
             <TouchableOpacity  onPress={this.view1.bind(this)}>
               <Image
-                style={{width: 26.5, height: 25}}
-                source = {require('../media/appIcon/list1.png')}
+                style={{width: 30, height: 30}}
+                source = {this.state.view1 ? require('../media/appIcon/display1.png') : require('../media/appIcon/hide1.png')}
               />
             </TouchableOpacity>
-            <TouchableOpacity  style={{marginTop:1}} onPress={this.view2.bind(this)}>
+            <TouchableOpacity style={{marginLeft: 2}} onPress={this.view2.bind(this)}>
               <Image
-                  style={{width: 24.5,height:23}}
-                  source = {require('../media/appIcon/list3.png')}
+                  style={{width: 30,height:30}}
+                  source = {this.state.view1 ? require('../media/appIcon/hide2.png') : require('../media/appIcon/display2.png')}
                 />
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={this.openMenu.bind(this)}>
-            <Text>Filter</Text>
+            <Text style={txtFilter} >FILTER</Text>
           </TouchableOpacity>
         </View>
 
@@ -182,5 +185,11 @@ const styles = StyleSheet.create({
   imgStyles: {
     width: productWidth,
     height: productHeight
+  },
+  txtFilter:{
+    fontWeight: 'bold',
+    borderWidth: 1,
+    borderColor: "black",
+    padding: 5
   }
 })

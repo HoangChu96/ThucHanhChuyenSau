@@ -46,23 +46,6 @@ class Filter extends Component {
         <ScrollView style={container}>
           <View style={wrapper}>
             <View style={title}>
-              <Text style= {txtTitle}>Giới Tính</Text>
-            </View>
-            <View style={checkBoxStyle}>
-              <TouchableOpacity onPress={() => this.onCheckBox()}>
-                {checkBox}
-              </TouchableOpacity>
-              <Text>Male</Text>
-
-              <TouchableOpacity>
-                {checkBox}
-              </TouchableOpacity>
-              <Text>Female</Text>
-            </View>
-          </View>
-
-          <View style={wrapper}>
-            <View style={title}>
               <Text style= {txtTitle} >PRICE</Text>
             </View>
             <View style={{flexDirection:'row', justifyContent:'space-between'}}>

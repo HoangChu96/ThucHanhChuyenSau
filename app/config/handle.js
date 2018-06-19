@@ -13,6 +13,7 @@ let saleProduct = url + 'app/get_collection.php?page=';
 let saleMain = url + 'app/get_sale_main.php';
 let cart = url + 'app/cart.php';
 let orderHistory = url + 'app//order_history.php';
+let infoBuyer = url + 'app/billOrder.php';
 
 module.exports = {
   productList: productList,
@@ -28,5 +29,6 @@ module.exports = {
   saleProduct: saleProduct,
   saleMain: saleMain,
   cart: cart,
-  orderHistory: orderHistory
+  orderHistory: orderHistory,
+  infoBuyer: infoBuyer
 }
