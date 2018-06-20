@@ -55,7 +55,7 @@ class Header extends Component{
         <View>
           <TextInput
               style={styles.textInput}
-              placeholder="What do you want to buy?"
+              placeholder="Search"
               underlineColorAndroid="transparent"
               value={this.state.txtSearch}
               onChangeText={text => this.setState({ txtSearch: text })}

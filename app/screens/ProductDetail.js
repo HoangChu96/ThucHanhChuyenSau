@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-  View, Text,Dimensions,
+  View, Text,Dimensions, Picker,
   StyleSheet, TouchableOpacity,Image, ScrollView, Alert
 } from 'react-native';
 
@@ -50,34 +50,14 @@ class ProductDetail extends Component{
       }
       
     }
-    // else{
-    //   Alert.alert(
-    //     'Notice',
-    //     'You are not logged in',
-    //     [
-    //       {text: 'OK'}
-    //     ],
-    //     {cancelable: false}
-    //   )
-    //   return false;
-    // }
-    
-    // this.setState(
-    //   {
-    //     cart: this.state.cart.concat({product})
-    //   },
-    //   () => saveCart(this.state.cartArray)
-    // );
-  // }
 
   render(){
     const {navigation} = this.props;
     const {product} = this.props.navigation.state.params;
     const {goBack} = this.props.navigation;
     const {
-      container,body, header, productStyles, bottomRow1Style,
-      wrapper, addToCart, imgStyles, leftStyles, txtBottom,
-      rightStyles, descriptionStyle, btnText, bottomStyle
+      container, header, productStyles, bottomRow1Style,
+      wrapper, addToCart, sizeStyle, leftStyles, txtBottom, btnText, bottomStyle
     } = styles;
 
     return(
@@ -108,23 +88,31 @@ class ProductDetail extends Component{
                 style={styles.imgStyles}
                 source={{ uri: url.product + product.images[1] }}
               />
-
             </ScrollView>
+
             <View style={productStyles}>
               <Text style={{fontSize: 18, color:'#34B089'}}>{product.name.toUpperCase()}</Text>
-              <Text style={{color: 'purple'}}>PRICE: {product.price}$</Text>
-              <Text>STATUS: </Text>
-              <Text>SIZE</Text>
+              <Text style={{color: 'black'}}>PRICE: {product.price}$</Text>
+              <View style={sizeStyle}>
+                <Text style={{color: 'black'}} >SIZE:</Text>
+                <Picker
+                  style={{ width: 100 }}
+                  selectedValue={this.state.size}
+                  onValueChange={(itemValue, itemIndex) => this.setState({size: itemValue}) } >
+                  <Picker.Item label="Select size" value="cancel" />
+                  <Picker.Item label="38" value="38" />
+                  <Picker.Item label="39" value="39" />
+                  <Picker.Item label="40" value="40" />
+                  <Picker.Item label="41" value="41" />
+                  <Picker.Item label="42" value="42" />
+                  <Picker.Item label="43" value="43" />
+                </Picker>
+              </View>
             </View>
           </View>
           <View style={bottomStyle}>
             <View style={bottomRow1Style}>
-              <TouchableOpacity>
                 <Text style={txtBottom}>Description</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={txtBottom}>Size Guide</Text>
-              </TouchableOpacity>
             </View>
             <Text style={{marginBottom: 10}}>{product.description}</Text>
           </View>
@@ -206,21 +194,22 @@ const styles = StyleSheet.create({
   productStyles:{
 
   },
+  sizeStyle:{
+    flexDirection: 'column'
+  },
   bottomStyle:{
-    borderColor: 'gray',
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
     marginVertical: 10
   },
   bottomRow1Style:{
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 10
   },
   txtBottom:{
     borderColor: '#34B089',
-    borderRightWidth: 1,
     borderBottomWidth:1,
-    padding: 5
+    padding: 5,
+    fontSize: 18,
+    fontWeight: 'bold'
   }
 
 })

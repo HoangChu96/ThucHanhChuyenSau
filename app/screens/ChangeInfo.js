@@ -4,8 +4,6 @@ import {
   Dimensions,  TextInput,  TouchableOpacity
 } from 'react-native';
 
-import {StackNavigator} from 'react-navigation';
-import {connect} from 'react-redux';
 import changeInfo from '../api/change_info';
 import getToken from '../api/getToken';
 const {height} = Dimensions.get('window');
@@ -22,11 +20,17 @@ class ChangeInfo extends Component{
   }
 
   onSuccess() {
+    const {navigation} = this.props;
     Alert.alert(
       'Notice',
       'Change Info successfully',
       [
-        { text: 'OK' }
+        { 
+          text: 'OK',
+          // onPress: () => navigation.navigate({
+          //   routeName: 'Main'
+          // })
+        }
       ],
       { cancelable: false }
     );

@@ -40,6 +40,8 @@
 		2E798C84DA954DAE9298FE5C /* libReactNativePayments.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 666DCAE9FA2F4CD8AB271668 /* libReactNativePayments.a */; };
 		F3E9576B961849F5B1708635 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9299EC0A4E5C4ABB8A920370 /* Stripe.framework */; };
 		B4F94F8E0DAA4520A2E3B98C /* libRNPaypalWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EDC6E81D274FC1AA206C0F /* libRNPaypalWrapper.a */; };
+		4FFE8D037A2F422CADB19CA5 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D269D55ADB849F4B715B9A3 /* libRNFetchBlob.a */; };
+		7A1BEF0CA11D48E485F16395 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A89E4CCB774826B4162402 /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +298,10 @@
 		9299EC0A4E5C4ABB8A920370 /* Stripe.framework */ = {isa = PBXFileReference; name = "Stripe.framework"; path = "System/Library/Frameworks/Stripe.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		0BBDFA556029402A8D19A216 /* RNPaypalWrapper.xcodeproj */ = {isa = PBXFileReference; name = "RNPaypalWrapper.xcodeproj"; path = "../node_modules/react-native-paypal-wrapper/ios/RNPaypalWrapper.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		99EDC6E81D274FC1AA206C0F /* libRNPaypalWrapper.a */ = {isa = PBXFileReference; name = "libRNPaypalWrapper.a"; path = "libRNPaypalWrapper.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A915CEF7311144ABB91F0B2F /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0D269D55ADB849F4B715B9A3 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		7D90700CDD9B467E9FF6DC43 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		01A89E4CCB774826B4162402 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +334,8 @@
 				123722067AE045A7B98ACB44 /* libRNImagePicker.a in Frameworks */,
 				2E798C84DA954DAE9298FE5C /* libReactNativePayments.a in Frameworks */,
 				B4F94F8E0DAA4520A2E3B98C /* libRNPaypalWrapper.a in Frameworks */,
+				4FFE8D037A2F422CADB19CA5 /* libRNFetchBlob.a in Frameworks */,
+				7A1BEF0CA11D48E485F16395 /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +517,8 @@
 				7520E13D6CAF46FFB0C75CF2 /* RNImagePicker.xcodeproj */,
 				4586C89E884048358893C610 /* ReactNativePayments.xcodeproj */,
 				0BBDFA556029402A8D19A216 /* RNPaypalWrapper.xcodeproj */,
+				A915CEF7311144ABB91F0B2F /* RNFetchBlob.xcodeproj */,
+				7D90700CDD9B467E9FF6DC43 /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1107,12 +1117,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-payments\lib\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-paypal-wrapper\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1137,12 +1151,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-payments\lib\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-paypal-wrapper\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1168,6 +1186,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-payments\lib\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-paypal-wrapper\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1192,6 +1212,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-payments\lib\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-paypal-wrapper\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1225,12 +1247,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-payments\lib\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-paypal-wrapper\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1264,12 +1290,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-payments\lib\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-paypal-wrapper\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1298,6 +1328,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
 			};
@@ -1323,6 +1355,8 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

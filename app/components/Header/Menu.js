@@ -3,91 +3,71 @@ import {
   Text, View, Image, StyleSheet, Alert, TouchableOpacity
 } from 'react-native';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import global from '../../global';
 import saveToken from '../../api/saveToken';
+import saveAvatar from '../../api/saveAvatar';
+import getAvatar from '../../api/getAvatar';
 
 import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'react-native-fetch-blob';
 
 //chọn ảnh
 var options = {
   title: 'Select Avatar',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
+  // customButtons: [
+  //   {name: 'fb', title: 'Choose Photo from Facebook'},
+  // ],
   storageOptions: {
     skipBackup: true,
     path: 'images'
   }
 };
 
-class Menu extends Component{
-  constructor(props){
+class Menu extends Component {
+  constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       user: null,
       avatarSource: null
     };
     global.onSignIn = this.onSignIn.bind(this);
   }
 
+  componentDidMount(){
+    getAvatar()
+    .then(e => this.setState({ avatarSource: e}));
+  }
+
   onSignIn(user) {
-      this.setState({ user });
+    this.setState({ user });
   }
 
   onSignOut() {
-      Alert.alert(
-        'Notice',
-        'Sign Out?',
-        [
-          { text: 'Cancel' },
-          { text: 'OK',
-            onPress: () => {
-              this.setState({ user: null })
-              saveToken('')
-            },
-            
-          }
-        ],
-        { cancelable: false }
-      )
-      this.props.dispatch(
+    Alert.alert(
+      'Notice',
+      'Sign Out?',
+      [
+        { text: 'Cancel' },
         {
-          type: 'SIGNIN',
-          isLogedIn: false
+          text: 'OK',
+          onPress: () => {
+            this.setState({ user: null, avatarSource: null })
+            saveToken('')
+          },
+
         }
-      );
+      ],
+      { cancelable: false }
+    )
+    this.props.dispatch(
+      {
+        type: 'SIGNIN',
+        isLogedIn: false
+      }
+    );
   }
 
-//use firebase sign out;
-  // onSignOut() {
-  //   const {navigation} = this.props;
-  //
-  //   firebaseApp.auth().signOut()
-  //   .then(function() {
-  //     // Sign-out successful.
-  //     Alert.alert(
-  //         'Notice',
-  //         'Sign up successfully',
-  //         [
-  //             { text: 'OK', onPress: () => navigation.navigate('MainApp') }
-  //         ],
-  //         { cancelable: false }
-  //     ),
-  //     this.props.dispatch({type: 'TOOGLE_LOGNOUT'})
-  //   })
-  //   .catch(function(error) {
-  //     // An error happened.
-  //     Alert.alert(
-  //         'Notice',
-  //         'fail!',
-  //         [
-  //             { text: 'OK' }
-  //         ],
-  //         { cancelable: false }
-  //     );
-  //   });
-  // }
 
   show() {
     ImagePicker.showImagePicker(options, (response) => {
@@ -107,44 +87,46 @@ class Menu extends Component{
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
         this.setState({
-          avatarSource: source
+          avatarSource: source,
+          data: response.data
         });
+        saveAvatar(this.state.avatarSource);
       }
     });
   }
 
-  render(){
-    const {navigation} = this.props;
-    const {container, profile, btnSignIn, signIn, btnMenu, btnText, userName, body} = styles;
-   const {user, avatarSource} = this.state;
+  render() {
+    const { navigation } = this.props;
+    const { container, profile, btnSignIn, signIn, btnMenu, btnText, userName, body } = styles;
+    const { user, avatarSource } = this.state;
 
     const logOutJSX = (
       <View style={container}>
-        <TouchableOpacity style={btnSignIn} onPress={()=> navigation.navigate('Authentication')}>
-            <Text style={signIn}>SIGN IN</Text>
+        <TouchableOpacity style={btnSignIn} onPress={() => navigation.navigate('Authentication')}>
+          <Text style={signIn}>SIGN IN</Text>
         </TouchableOpacity>
       </View>
     );
-    
+
     const logInJSX = (
-      <View  style={body}>
+      <View style={body}>
         <Text style={userName}>{user ? user.name.toUpperCase() : ''}</Text>
         <View>
-          <TouchableOpacity style={btnMenu} onPress={()=> navigation.navigate('OrderHistory')}>
-              <Text style={btnText}>Order History</Text>
+          <TouchableOpacity style={btnMenu} onPress={() => navigation.navigate('OrderHistory')}>
+            <Text style={btnText}>Order History</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={btnMenu} onPress={()=> 
+          <TouchableOpacity style={btnMenu} onPress={() =>
             navigation.navigate({
-              routeName: 'ChangeInfo',
+              routeName: 'ShowInfo',
               params: {
-                user:user
+                user: user
               }
             })
           }>
-              <Text style={btnText}>Edit Profile</Text>
+            <Text style={btnText}>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity style={btnMenu} onPress={this.onSignOut.bind(this)}>
-              <Text style={btnText}>Sign Out</Text>
+            <Text style={btnText}>Sign Out</Text>
           </TouchableOpacity>
         </View>
 
@@ -155,26 +137,26 @@ class Menu extends Component{
 
     const mainJSX = this.state.user ? logInJSX : logOutJSX;
 
-    let img = avatarSource == null ? 
+    let img = avatarSource == null ?
       <Image
         source={require('../../media/appIcon/profile.png')}
         style={profile}
       /> :
-      <Image source={this.state.avatarSource} style={profile}/>
+      <Image source={this.state.avatarSource} style={profile} />
 
     return (
       <View style={container}>
         <TouchableOpacity onPress={this.show.bind(this)}>
           {img}
-        </TouchableOpacity>      
-          
+        </TouchableOpacity>
+
         {mainJSX}
       </View>
     )
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     isLogedIn: state.isLogedIn,
   };
@@ -185,10 +167,10 @@ export default connect(mapStateToProps)(Menu);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#34B089',
+    backgroundColor: '#34B089',
     alignItems: 'center'
   },
-  body:{
+  body: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -201,8 +183,8 @@ const styles = StyleSheet.create({
   },
   btnSignIn: {
     justifyContent: 'center',
-    height:40,
-    backgroundColor:'#fff',
+    height: 40,
+    backgroundColor: '#fff',
     paddingHorizontal: 50,
     borderRadius: 5
   },
@@ -212,11 +194,11 @@ const styles = StyleSheet.create({
   },
   btnMenu: {
     justifyContent: 'center',
-    height:40,
-    backgroundColor:'#fff',
+    height: 40,
+    backgroundColor: '#fff',
     width: 200,
     borderRadius: 5,
-    marginBottom:10,
+    marginBottom: 10,
     paddingLeft: 10
   },
   btnText: {
@@ -226,6 +208,6 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 15,
     color: '#fff',
-    marginBottom:50
+    marginBottom: 50
   }
 })
