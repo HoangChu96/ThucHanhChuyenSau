@@ -12,37 +12,13 @@ class ProductListView1 extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedLike: false,
-      selectedTab: false,
+
     };
     console.log(props.dataSource);
   }
 
   render(){
     const {navigation, dataSource} = this.props;
-
-    const selectedTab = () => {
-      this.setState({
-        selectedTab: !this.state.selectedTab,
-      })
-    }
-    //thay đổi state cho like;
-    const selectedFavorite = () => {
-      this.setState({
-        selectedLike: !this.state.selectedLike,
-      });
-    };
-    const favorite = (
-        <Image
-          style = {styles.imageLike}
-          source = {require('../media/appIcon/favoriteFull.png')}/>
-    );
-    const noFavorite = (
-      <Image
-        style = {styles.imageLike}
-        source = {require('../media/appIcon/favoriteEmty.png')}/>
-    );
-    const like = this.state.selectedLike ? favorite : noFavorite;
 
     return (
       <ScrollView>
@@ -77,8 +53,7 @@ class ProductListView1 extends Component{
 }
 function mapStateToProps(state){
   return {
-    dataSource: state.dataSource,
-    cartArray: state.cartArray
+    dataSource: state.dataSource
   }
 }
 export default connect(mapStateToProps)(ProductListView1);

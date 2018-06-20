@@ -25,12 +25,10 @@ class ProductList extends Component{
       selectView: true,
       view1: true
     };
-    console.log(this.props.productType);
   }
 
   componentDidMount(){
     const idType = this.props.productType.id;
-    console.log(idType);
     fetch(url.category + idType)
     .then(res => res.json())
     .then((resJSON) => {
@@ -85,7 +83,7 @@ class ProductList extends Component{
     )
     //goi bộ lọc filter
     const filter =() => {
-      <Filter />
+      <Filter navigation={navigation}/>
     }
     //ham điều kiện: true hiện th view 1, false hiển thị view 2;
     const mainList = this.state.selectView ? listview1 : listview2 ;

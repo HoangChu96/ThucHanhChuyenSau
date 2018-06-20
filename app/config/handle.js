@@ -1,4 +1,4 @@
-let url = 'http://192.168.18.101/';
+let url = 'http://192.168.0.79/';
 let loginUrl =  url + 'app/login.php';
 let registerUrl = url + 'app/register.php';
 let changeInfoUrl = url + 'app/change_info.php';
@@ -14,6 +14,7 @@ let saleMain = url + 'app/get_sale_main.php';
 let cart = url + 'app/cart.php';
 let orderHistory = url + 'app//order_history.php';
 let infoBuyer = url + 'app/billOrder.php';
+let filter = url + 'app/filter.php';
 
 module.exports = {
   productList: productList,
@@ -30,5 +31,6 @@ module.exports = {
   saleMain: saleMain,
   cart: cart,
   orderHistory: orderHistory,
-  infoBuyer: infoBuyer
+  infoBuyer: infoBuyer,
+  filter: filter
 }

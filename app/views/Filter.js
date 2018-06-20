@@ -1,46 +1,60 @@
 import React, {Component} from 'react';
 import {
   View, Text, TouchableOpacity,
-  Slider, Image, StyleSheet,
-  Button, Picker, ScrollView
+  Slider, StyleSheet,
+  Picker, ScrollView
 } from 'react-native';
+import {connect} from 'react-redux';
 
 class Filter extends Component {
   constructor(props){
     super(props);
     this.state = {
-      value: 0,
+      value: 1,
       minValue:0,
       maxValue: 500,
-      onCheck: false,
-      PickerValueHolder : ''
+      PickerValueHolder : '',
+      arrayFilter: []
     };
+    console.log(props.dataSource);
   }
 
-  onCheckBox = () => {
-    this.setState({
-      onCheck: !this.state.onCheck,
-    });
-  };
+  searchFilter(){
+    const {dataSource} = this.props;
+
+    let e = this.state.PickerValueHolder;
+    switch (e) {
+      case 'SaleProduct':
+        this.props.dispatch({
+          type: 'TYPEPRODUCT',
+          dataSource: dataSource.filter((sale) => {
+            return (
+              sale.inCollection === '1' && sale.price <= Math.round(this.state.value * this.state.maxValue)
+            )
+          })
+        });
+        break;
+      case 'TopProduct':
+        this.props.dispatch({
+          type: 'TYPEPRODUCT',
+          dataSource: dataSource.filter((top) => {
+            return (
+              top.new === '1'&& top.price <= Math.round(this.state.value * this.state.maxValue)
+            )
+          })
+        });
+        break;
+      default:
+        PickerValueHolder = '';
+    }
+
+  }
 
   render() {
     const {
-      checkBoxStyle, container, imgCheckBox, title, txtTitle,
-      categoryStyles, txtProduct, MainContainer, wrapper
+      container, title, txtTitle,
+      MainContainer, wrapper
     } = styles;
-    const checked = (
-      <Image
-        style={imgCheckBox}
-        source={require('../media/appIcon/checked.png')}
-      />
-    )
-    const unchecked = (
-      <Image
-        style={imgCheckBox}
-        source={require('../media/appIcon/unchecked.png')}
-      />
-    )
-    const checkBox = this.state.onCheck ? checked : unchecked;
 
     return(
         <ScrollView style={container}>
@@ -60,8 +74,7 @@ class Filter extends Component {
               minimumTrackTintColor = '#34B089'
               maximunValue = {this.state.maxValue}
               maximumTrackTintColor = 'red'
-              // onSlidingComplete={}
-              step={0.1}
+              step={0.05}
             />
           </View>
 
@@ -72,15 +85,15 @@ class Filter extends Component {
             <View style={MainContainer}>
               <Picker
                 selectedValue={this.state.PickerValueHolder}
-                onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
-                <Picker.Item label="New Product" value="New Product" />
-                <Picker.Item label="Sale Product" value="Sale Product" />
-                <Picker.Item label="Top Product" value="Top Product" />
+                onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue}) } >
+                <Picker.Item label="Select sort by" value="cancel" />
+                <Picker.Item label="Sale Product" value="SaleProduct" />
+                <Picker.Item label="Top Product" value="TopProduct" />
               </Picker>
             </View>
           </View>
 
-          <TouchableOpacity style={title}>
+          <TouchableOpacity style={title} onPress={this.searchFilter.bind(this)} >
             <Text style= {txtTitle}>Find</Text>
           </TouchableOpacity>
 
@@ -88,6 +101,14 @@ class Filter extends Component {
     )
   }
 }
+
+function mapStateToProps(state){
+  return {
+    dataSource: state.dataSource
+  }
+}
+export default connect(mapStateToProps)(Filter);
+
 const styles = StyleSheet.create({
   container:{
     margin:10,
@@ -130,4 +151,3 @@ const styles = StyleSheet.create({
    margin: 20
  }
 })
-export default Filter;
