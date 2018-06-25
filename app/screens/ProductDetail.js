@@ -73,7 +73,10 @@ class ProductDetail extends Component{
             style={addToCart}
             onPress={() => this.addThisProductToCart()}
           >
-            <Text style={btnText}>ADD TO CART</Text>
+            <Image
+                style={{height: 30, width:30 }}
+                source={ require('../media/appIcon/addCart.png') }
+              />
           </TouchableOpacity>
         </View>
 
@@ -87,6 +90,14 @@ class ProductDetail extends Component{
               <Image
                 style={styles.imgStyles}
                 source={{ uri: url.product + product.images[1] }}
+              />
+              <Image
+                style={styles.imgStyles}
+                source={{ uri: url.product + product.images[2] }}
+              />
+              <Image
+                style={styles.imgStyles}
+                source={{ uri: url.product + product.images[3] }}
               />
             </ScrollView>
 

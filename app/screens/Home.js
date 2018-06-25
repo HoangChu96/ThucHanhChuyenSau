@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   ScrollView
 } from 'react-native';
-import NewProduct from '../views/NewProduct';
 import HightLightProduct from '../views/HightLightProduct';
 import SaleProduct from '../views/SaleProduct';
 import TopCategory from '../views/TopCategory';

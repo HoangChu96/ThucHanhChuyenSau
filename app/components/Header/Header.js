@@ -6,13 +6,11 @@ import {
 } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import SaleProduct from '../../views/SaleProduct';
 import global from '../../global';
-import searchProduct from '../../api/searchProduct';
 import { connect } from 'react-redux';
 import url from '../../config/handle';
 
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class Header extends Component{
   constructor(props){
@@ -43,8 +41,6 @@ class Header extends Component{
         }
       )
       .catch(err => console.log(err));
-      console.log("header");
-      console.log(this.props.searchArray);
       this.setState({txtSearch: ''});
       
   }
@@ -109,7 +105,7 @@ export default connect(mapStateToProps)(Header);
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: height/15,
+    height: 45,
     backgroundColor:'#34B089',
     padding:10,
     flexDirection: 'row',
@@ -121,10 +117,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   textInput:{
-    height: height/20,
+    height: 25,
     backgroundColor:'#fff',
-
-    fontSize:12.5
+    fontSize:12.5,
+    padding: 0,
+    paddingHorizontal: 10
   },
   titleStyle: {
     color:'#fff',

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text, TouchableOpacity, ScrollView,
-    ListView, View, Image, Dimensions, FlatList
+    StyleSheet, Text, TouchableOpacity, ScrollView, View, Image, Dimensions
 } from 'react-native';
-import global from '../global';
 import url from '../config/handle';
 import { connect } from 'react-redux';
 
@@ -38,55 +36,44 @@ class SearchView extends Component {
     // }
     render() {
         const {
-            product, mainRight, txtMaterial, txtColor,
+            product, mainRight, bottomRight,
             txtName, txtPrice, productImage,
-            txtShowDetail, showDetailContainer, wrapper
+            txtShowDetail, showDetailContainer
         } = styles;
-        const {searchArray} = this.props;
-        
+        const { searchArray, navigation } = this.props;
+
         return (
-            <View>
-            {
-                searchArray.map(e => (
-                    <View style={product} key={e.id}>
-                        <Image  source={{ uri: url.product + e.images[0] }} style={productImage} />
-                        <View style={mainRight}>
-                            <Text style={txtName}>{toTitleCase(e.name)}</Text>
-                            <Text style={txtPrice}>{e.price}$</Text>
-                            <Text style={txtMaterial}>Material {e.material}</Text>
-                            <View style={{ flexDirection: 'row' }} >
-                                <Text style={txtColor}>Color {e.color}</Text>
-                                <View
-                                    style={{
-                                        height: 15,
-                                        width: 15,
-                                        backgroundColor: 'white',
-                                        borderRadius: 15,
-                                        marginLeft: 10
+            <ScrollView>
+                {
+                    searchArray.map(e => (
+                        <View style={product} key={e.id}>
+                            <Image source={{ uri: url.product + e.images[0] }} style={productImage} />
+                            <View style={mainRight}>
+                                <Text style={txtName}>{toTitleCase(e.name)}</Text>
+                                <View style={bottomRight} >
+                                    <Text style={txtPrice}>{e.price}$</Text>
+                                    <TouchableOpacity style={showDetailContainer} onPress={() => {
+                                        navigation.navigate({
+                                            routeName: 'ProductDetail',
+                                            params: {
+                                                product: e //truyền dữ liệu của 1 product sang detail
+                                            }
+                                        })
                                     }}
-                                />
+                                    >
+                                        <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                            <TouchableOpacity style={showDetailContainer} onPress={() => {
-                                navigation.navigate({
-                                    routeName: 'ProductDetail',
-                                    params: {
-                                        product:e //truyền dữ liệu của 1 product sang detail
-                                    }
-                                })
-                            }}
-                            >
-                                <Text style={txtShowDetail}>SHOW DETAILS</Text>
-                            </TouchableOpacity>
                         </View>
-                    </View>
-                ))
-            }
-            </View>
+                    ))
+                }
+            </ScrollView>
         );
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         searchArray: state.searchArray
     }
@@ -116,12 +103,13 @@ const styles = StyleSheet.create({
     productImage: {
         width: imageWidth,
         height: imageHeight,
-        flex: 1,
+        flex: 2,
         resizeMode: 'center'
     },
     mainRight: {
-        flex: 3,
-        justifyContent: 'space-between'
+        flex: 5,
+        // justifyContent: 'space-between'
+        paddingVertical: 10,
     },
     productController: {
         flexDirection: 'row'
@@ -135,24 +123,17 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         color: '#A7A7A7',
         fontSize: 20,
-        fontWeight: '400',
+        // fontWeight: '400',
         fontFamily: 'Avenir'
     },
     txtPrice: {
         paddingLeft: 20,
         color: '#C21C70',
         fontSize: 15,
-        fontWeight: '400',
+        // fontWeight: '400',
         fontFamily: 'Avenir'
     },
     txtColor: {
-        paddingLeft: 20,
-        color: 'black',
-        fontSize: 15,
-        fontWeight: '400',
-        fontFamily: 'Avenir'
-    },
-    txtMaterial: {
         paddingLeft: 20,
         color: 'black',
         fontSize: 15,
@@ -166,61 +147,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir',
         textAlign: 'right',
     },
-    showDetailContainer: {
+    // showDetailContainer: {
+    //     position: 'absolute',
+    //     alignSelf: 'flex-end',
+    //     marginTop: 100
+    // },
+    bottomRight: {
         flexDirection: 'row',
-        position: 'absolute',
-        alignSelf: 'flex-end',
-        marginTop: 100
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        paddingTop: 10
     }
 });
-
-
-// <View style={productStyles}>
-// <View style={leftStyles}>
-//     <Image
-//         style={imgStyles}
-//         source={require('../media/temp/sp1.jpg')}
-//     />
-// </View>
-// <View style={bottomStyles}>
-//     <Text style={{fontSize: 18, color:'#34B089'}}>NIKE ROSHE</Text>
-//     <Text style={{color: '#AFAEAF'}}>PRICE: 300$</Text>
-// </View>
-// </View>
-
-// <View style={productStyles}>
-// <View style={leftStyles}>
-//     <Image
-//         style={imgStyles}
-//         source={require('../media/temp/sp2.jpg')}
-//     />
-// </View>
-// <View style={bottomStyles}>
-//     <Text style={{fontSize: 18, color:'#34B089'}}>NIKE AIR FORCE</Text>
-//     <Text style={{color: '#AFAEAF'}}>PRICE: 123$ </Text>
-// </View>
-// </View>
-// <View style={productStyles}>
-// <View style={leftStyles}>
-//     <Image
-//         style={imgStyles}
-//         source={require('../media/temp/sp3.jpg')}
-//     />
-// </View>
-// <View style={bottomStyles}>
-//     <Text style={{fontSize: 18, color:'#34B089'}}>NIKE AIR JORDAN</Text>
-//     <Text style={{color: '#AFAEAF'}}>PRICE: 178$</Text>
-// </View>
-// </View>
-// <View style={productStyles}>
-// <View style={leftStyles}>
-//     <Image
-//         style={imgStyles}
-//         source={require('../media/temp/sp4.jpg')}
-//     />
-// </View>
-// <View style={bottomStyles}>
-//     <Text style={{fontSize: 18, color:'#34B089'}}>NIKE AIR ZOOM</Text>
-//     <Text style={{color: '#AFAEAF'}}>PRICE: 250$</Text>
-// </View>
-// </View>

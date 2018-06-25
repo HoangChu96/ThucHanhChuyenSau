@@ -3,13 +3,13 @@ import {  } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
-import Header from '../components/Header/Header';
-import Search from '../screens/Search';
+import Search from '../screens/SearchView';
+import ProductDetail from '../screens/ProductDetail';
 
-const onClickSearch = StackNavigator(
+const SearchNav = StackNavigator(
   {
-    Header : {screen: Header},
-    Search: { screen: Search}
+    Search: { screen: Search},
+    ProductDetail: {screen: ProductDetail}
   },
   {
     headerMode: 'none',
@@ -45,7 +45,7 @@ const onClickSearch = StackNavigator(
 export default class SearchNavigator extends Component{
   render(){
     return (
-      <onClickSearch />
+      <SearchNav />
     )
   }
 }

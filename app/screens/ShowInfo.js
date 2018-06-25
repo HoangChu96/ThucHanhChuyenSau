@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     },
     txtInfo: {
         padding: 10,
+        width: 80,
         color: '#fff',
         backgroundColor: '#34B089',
         marginVertical: 10,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
         // height: 50,
         paddingVertical: 10,
         backgroundColor:'#34B089',
-        marginVertical: 240,
+        // marginVertical: 240,
         // width,
         borderRadius: 10
     },

@@ -10,6 +10,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import getCart from '../api/getCart';
 import Contact from './Contact';
 import ProductNavigator from '../navigations/ProductNavigator';
+import SearchNavigator from '../navigations/SearchNavigator';
 import CartNavigator from '../navigations/CartNavigator';
 import Header from '../components/Header/Header';
 import SearchView from './SearchView';
@@ -108,7 +109,7 @@ class Main extends PureComponent{
             renderSelectedIcon = { () => <Image source = {require('../media/appIcon/search.png')} style={styles.tabStyles}/>}
             onPress={() => this.setState({ selectedTab: 'search' })}
           >
-            <SearchView />
+            <SearchNavigator />
           </TabNavigator.Item>
 
           <TabNavigator.Item
